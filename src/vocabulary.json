@@ -1,0 +1,1108 @@
+[
+  {
+    "id": "word-0",
+    "form": "przyjmuje",
+    "base": "przyjmować",
+    "uk": "приймати",
+    "kind": "Дієслово"
+  },
+  {
+    "id": "word-1",
+    "form": "poślubia",
+    "base": "poślubiać",
+    "uk": "одружуватися з; брати шлюб із",
+    "kind": "Дієслово"
+  },
+  {
+    "id": "word-2",
+    "form": "żeni się",
+    "base": "żenić się",
+    "uk": "одружуватися (про чоловіка)",
+    "kind": "Дієслово"
+  },
+  {
+    "id": "word-3",
+    "form": "podejmuje",
+    "base": "podejmować",
+    "uk": "розпочинати; братися за",
+    "kind": "Дієслово"
+  },
+  {
+    "id": "word-4",
+    "form": "prowadzi",
+    "base": "prowadzić",
+    "uk": "вести; проводити",
+    "kind": "Дієслово"
+  },
+  {
+    "id": "word-5",
+    "form": "ginie",
+    "base": "ginąć",
+    "uk": "гинути",
+    "kind": "Дієслово"
+  },
+  {
+    "id": "word-6",
+    "form": "zostaje",
+    "base": "zostawać",
+    "uk": "ставати; залишатися",
+    "kind": "Дієслово"
+  },
+  {
+    "id": "word-7",
+    "form": "powstaje",
+    "base": "powstawać",
+    "uk": "виникати; утворюватися",
+    "kind": "Дієслово"
+  },
+  {
+    "id": "word-8",
+    "form": "ustanowiono",
+    "base": "ustanowić",
+    "uk": "встановити; заснувати",
+    "kind": "Дієслово"
+  },
+  {
+    "id": "word-9",
+    "form": "przenosi",
+    "base": "przenosić",
+    "uk": "переносити",
+    "kind": "Дієслово"
+  },
+  {
+    "id": "word-10",
+    "form": "zdobyć",
+    "base": "zdobyć",
+    "uk": "здобути; захопити",
+    "kind": "Дієслово"
+  },
+  {
+    "id": "word-11",
+    "form": "wygrywa",
+    "base": "wygrywać",
+    "uk": "перемагати; вигравати",
+    "kind": "Дієслово"
+  },
+  {
+    "id": "word-12",
+    "form": "przyłączone",
+    "base": "przyłączyć",
+    "uk": "приєднати",
+    "kind": "Дієслово"
+  },
+  {
+    "id": "word-13",
+    "form": "odwoływał",
+    "base": "odwoływać się",
+    "uk": "посилатися",
+    "kind": "Дієслово"
+  },
+  {
+    "id": "word-14",
+    "form": "domagając się",
+    "base": "domagać się",
+    "uk": "вимагати",
+    "kind": "Дієслово"
+  },
+  {
+    "id": "word-15",
+    "form": "sprowadza",
+    "base": "sprowadzać",
+    "uk": "приводити; запрошувати звідкись",
+    "kind": "Дієслово"
+  },
+  {
+    "id": "word-16",
+    "form": "pomóc",
+    "base": "pomóc",
+    "uk": "допомогти",
+    "kind": "Дієслово"
+  },
+  {
+    "id": "word-17",
+    "form": "zagrażać",
+    "base": "zagrażać",
+    "uk": "загрожувати",
+    "kind": "Дієслово"
+  },
+  {
+    "id": "word-18",
+    "form": "najeżdżają",
+    "base": "najeżdżać",
+    "uk": "нападати; вторгатися",
+    "kind": "Дієслово"
+  },
+  {
+    "id": "word-19",
+    "form": "niszczą",
+    "base": "niszczyć",
+    "uk": "руйнувати; знищувати",
+    "kind": "Дієслово"
+  },
+  {
+    "id": "word-20",
+    "form": "powstrzymać",
+    "base": "powstrzymać",
+    "uk": "зупинити; стримати",
+    "kind": "Дієслово"
+  },
+  {
+    "id": "word-21",
+    "form": "obejmuje",
+    "base": "obejmować",
+    "uk": "обіймати; перебирати (владу)",
+    "kind": "Дієслово"
+  },
+  {
+    "id": "word-22",
+    "form": "zasiada",
+    "base": "zasiadać",
+    "uk": "сідати (на трон); засідати",
+    "kind": "Дієслово"
+  },
+  {
+    "id": "word-23",
+    "form": "zawdzięczamy",
+    "base": "zawdzięczać",
+    "uk": "завдячувати",
+    "kind": "Дієслово"
+  },
+  {
+    "id": "word-24",
+    "form": "wyznacza",
+    "base": "wyznaczać",
+    "uk": "визначати",
+    "kind": "Дієслово"
+  },
+  {
+    "id": "word-25",
+    "form": "jednoczą się",
+    "base": "jednoczyć się",
+    "uk": "об'єднуватися",
+    "kind": "Дієслово"
+  },
+  {
+    "id": "word-26",
+    "form": "wybiera",
+    "base": "wybierać",
+    "uk": "обирати",
+    "kind": "Дієслово"
+  },
+  {
+    "id": "word-27",
+    "form": "pokonują",
+    "base": "pokonywać",
+    "uk": "перемагати; долати",
+    "kind": "Дієслово"
+  },
+  {
+    "id": "word-28",
+    "form": "stoczono",
+    "base": "stoczyć",
+    "uk": "провести (битву)",
+    "kind": "Дієслово"
+  },
+  {
+    "id": "word-29",
+    "form": "zyskuje",
+    "base": "zyskiwać",
+    "uk": "здобувати; отримувати",
+    "kind": "Дієслово"
+  },
+  {
+    "id": "word-30",
+    "form": "zezwala",
+    "base": "zezwalać",
+    "uk": "дозволяти",
+    "kind": "Дієслово"
+  },
+  {
+    "id": "word-31",
+    "form": "ogłasza",
+    "base": "ogłaszać",
+    "uk": "проголошувати; оголошувати",
+    "kind": "Дієслово"
+  },
+  {
+    "id": "word-32",
+    "form": "przedstawia",
+    "base": "przedstawiać",
+    "uk": "представляти; викладати",
+    "kind": "Дієслово"
+  },
+  {
+    "id": "word-33",
+    "form": "obraca się",
+    "base": "obracać się",
+    "uk": "обертатися",
+    "kind": "Дієслово"
+  },
+  {
+    "id": "word-34",
+    "form": "potwierdzona",
+    "base": "potwierdzić",
+    "uk": "підтвердити",
+    "kind": "Дієслово"
+  },
+  {
+    "id": "word-35",
+    "form": "liczy",
+    "base": "liczyć",
+    "uk": "налічувати; розраховувати (на)",
+    "kind": "Дієслово"
+  },
+  {
+    "id": "word-36",
+    "form": "stanowią",
+    "base": "stanowić",
+    "uk": "становити",
+    "kind": "Дієслово"
+  },
+  {
+    "id": "word-37",
+    "form": "wchodzi",
+    "base": "wchodzić",
+    "uk": "входити",
+    "kind": "Дієслово"
+  },
+  {
+    "id": "word-38",
+    "form": "poniesie",
+    "base": "ponieść",
+    "uk": "зазнати; понести (витрати)",
+    "kind": "Дієслово"
+  },
+  {
+    "id": "word-39",
+    "form": "wprowadzono",
+    "base": "wprowadzić",
+    "uk": "запровадити",
+    "kind": "Дієслово"
+  },
+  {
+    "id": "word-40",
+    "form": "zrywania",
+    "base": "zrywać",
+    "uk": "зривати; переривати",
+    "kind": "Дієслово"
+  },
+  {
+    "id": "word-41",
+    "form": "unieważniania",
+    "base": "unieważniać",
+    "uk": "скасовувати; визнавати недійсним",
+    "kind": "Дієслово"
+  },
+  {
+    "id": "word-42",
+    "form": "uniemożliwiał",
+    "base": "uniemożliwiać",
+    "uk": "унеможливлювати",
+    "kind": "Дієслово"
+  },
+  {
+    "id": "word-43",
+    "form": "zajmują",
+    "base": "zajmować",
+    "uk": "займати; захоплювати",
+    "kind": "Дієслово"
+  },
+  {
+    "id": "word-44",
+    "form": "zawarto",
+    "base": "zawrzeć",
+    "uk": "укласти (мир, угоду)",
+    "kind": "Дієслово"
+  },
+  {
+    "id": "word-45",
+    "form": "wspiera",
+    "base": "wspierać",
+    "uk": "підтримувати",
+    "kind": "Дієслово"
+  },
+  {
+    "id": "word-46",
+    "form": "uchwalono",
+    "base": "uchwalić",
+    "uk": "ухвалити",
+    "kind": "Дієслово"
+  },
+  {
+    "id": "word-47",
+    "form": "znosi",
+    "base": "znosić",
+    "uk": "скасовувати",
+    "kind": "Дієслово"
+  },
+  {
+    "id": "word-48",
+    "form": "znika",
+    "base": "znikać",
+    "uk": "зникати",
+    "kind": "Дієслово"
+  },
+  {
+    "id": "word-49",
+    "form": "przynoszą",
+    "base": "przynosić",
+    "uk": "приносити",
+    "kind": "Дієслово"
+  },
+  {
+    "id": "word-50",
+    "form": "toczą się",
+    "base": "toczyć się",
+    "uk": "тривати; відбуватися",
+    "kind": "Дієслово"
+  },
+  {
+    "id": "word-51",
+    "form": "rozwija się",
+    "base": "rozwijać się",
+    "uk": "розвиватися",
+    "kind": "Дієслово"
+  },
+  {
+    "id": "word-52",
+    "form": "przeprowadza",
+    "base": "przeprowadzać",
+    "uk": "проводити; здійснювати",
+    "kind": "Дієслово"
+  },
+  {
+    "id": "word-53",
+    "form": "przekraczają",
+    "base": "przekraczać",
+    "uk": "перетинати",
+    "kind": "Дієслово"
+  },
+  {
+    "id": "word-54",
+    "form": "traci",
+    "base": "tracić",
+    "uk": "втрачати",
+    "kind": "Дієслово"
+  },
+  {
+    "id": "word-55",
+    "form": "wybucha",
+    "base": "wybuchać",
+    "uk": "спалахувати; починатися раптово",
+    "kind": "Дієслово"
+  },
+  {
+    "id": "word-56",
+    "form": "przeżywa",
+    "base": "przeżywać",
+    "uk": "переживати; виживати",
+    "kind": "Дієслово"
+  },
+  {
+    "id": "word-57",
+    "form": "wyzwolić",
+    "base": "wyzwolić",
+    "uk": "визволити",
+    "kind": "Дієслово"
+  },
+  {
+    "id": "word-58",
+    "form": "stłumione",
+    "base": "stłumić",
+    "uk": "придушити",
+    "kind": "Дієслово"
+  },
+  {
+    "id": "word-59",
+    "form": "przesiedleni",
+    "base": "przesiedlić",
+    "uk": "переселити",
+    "kind": "Дієслово"
+  },
+  {
+    "id": "word-60",
+    "form": "podpisany",
+    "base": "podpisać",
+    "uk": "підписати",
+    "kind": "Дієслово"
+  },
+  {
+    "id": "word-61",
+    "form": "ogranicza",
+    "base": "ograniczać",
+    "uk": "обмежувати",
+    "kind": "Дієслово"
+  },
+  {
+    "id": "word-62",
+    "form": "zapobiec",
+    "base": "zapobiec",
+    "uk": "запобігти",
+    "kind": "Дієслово"
+  },
+  {
+    "id": "word-63",
+    "form": "sprawuje",
+    "base": "sprawować",
+    "uk": "здійснювати (владу); обіймати (посаду)",
+    "kind": "Дієслово"
+  },
+  {
+    "id": "word-64",
+    "form": "przystępuje",
+    "base": "przystępować",
+    "uk": "вступати; приєднуватися",
+    "kind": "Дієслово"
+  },
+  {
+    "id": "word-65",
+    "form": "umiera",
+    "base": "umierać",
+    "uk": "помирати",
+    "kind": "Дієслово"
+  },
+  {
+    "id": "word-66",
+    "form": "uczestniczy",
+    "base": "uczestniczyć",
+    "uk": "брати участь",
+    "kind": "Дієслово"
+  },
+  {
+    "id": "word-67",
+    "form": "władca",
+    "base": "władca",
+    "uk": "правитель",
+    "kind": "Іменник"
+  },
+  {
+    "id": "word-68",
+    "form": "chrzest",
+    "base": "chrzest",
+    "uk": "хрещення",
+    "kind": "Іменник"
+  },
+  {
+    "id": "word-69",
+    "form": "księżniczkę",
+    "base": "księżniczka",
+    "uk": "княжна; принцеса",
+    "kind": "Іменник"
+  },
+  {
+    "id": "word-70",
+    "form": "księcia",
+    "base": "książę",
+    "uk": "князь; принц",
+    "kind": "Іменник"
+  },
+  {
+    "id": "word-71",
+    "form": "chrystianizacji",
+    "base": "chrystianizacja",
+    "uk": "християнізація",
+    "kind": "Іменник"
+  },
+  {
+    "id": "word-72",
+    "form": "narodu",
+    "base": "naród",
+    "uk": "народ",
+    "kind": "Іменник"
+  },
+  {
+    "id": "word-73",
+    "form": "biskup",
+    "base": "biskup",
+    "uk": "єпископ",
+    "kind": "Іменник"
+  },
+  {
+    "id": "word-74",
+    "form": "plemion",
+    "base": "plemię",
+    "uk": "плем'я",
+    "kind": "Іменник"
+  },
+  {
+    "id": "word-75",
+    "form": "prochy",
+    "base": "prochy",
+    "uk": "прах; останки",
+    "kind": "Іменник"
+  },
+  {
+    "id": "word-76",
+    "form": "arcybiskupstwo",
+    "base": "arcybiskupstwo",
+    "uk": "архієпископство",
+    "kind": "Іменник"
+  },
+  {
+    "id": "word-77",
+    "form": "królem",
+    "base": "król",
+    "uk": "король",
+    "kind": "Іменник"
+  },
+  {
+    "id": "word-78",
+    "form": "cesarzem",
+    "base": "cesarz",
+    "uk": "імператор",
+    "kind": "Іменник"
+  },
+  {
+    "id": "word-79",
+    "form": "wsparciu",
+    "base": "wsparcie",
+    "uk": "підтримка",
+    "kind": "Іменник"
+  },
+  {
+    "id": "word-80",
+    "form": "zjazd",
+    "base": "zjazd",
+    "uk": "з'їзд",
+    "kind": "Іменник"
+  },
+  {
+    "id": "word-81",
+    "form": "dwór",
+    "base": "dwór",
+    "uk": "двір (правителя)",
+    "kind": "Іменник"
+  },
+  {
+    "id": "word-82",
+    "form": "relikwia",
+    "base": "relikwia",
+    "uk": "реліквія",
+    "kind": "Іменник"
+  },
+  {
+    "id": "word-83",
+    "form": "zwycięstwa",
+    "base": "zwycięstwo",
+    "uk": "перемога",
+    "kind": "Іменник"
+  },
+  {
+    "id": "word-84",
+    "form": "oddziałami",
+    "base": "oddział",
+    "uk": "військовий підрозділ; загін",
+    "kind": "Іменник"
+  },
+  {
+    "id": "word-85",
+    "form": "rząd",
+    "base": "rząd",
+    "uk": "уряд",
+    "kind": "Іменник"
+  },
+  {
+    "id": "word-86",
+    "form": "zwrotu",
+    "base": "zwrot",
+    "uk": "повернення",
+    "kind": "Іменник"
+  },
+  {
+    "id": "word-87",
+    "form": "zakon",
+    "base": "zakon",
+    "uk": "орден (релігійний)",
+    "kind": "Іменник"
+  },
+  {
+    "id": "word-88",
+    "form": "potęgę",
+    "base": "potęga",
+    "uk": "могутність",
+    "kind": "Іменник"
+  },
+  {
+    "id": "word-89",
+    "form": "bezpieczeństwu",
+    "base": "bezpieczeństwo",
+    "uk": "безпека",
+    "kind": "Іменник"
+  },
+  {
+    "id": "word-90",
+    "form": "spustoszenie",
+    "base": "spustoszenie",
+    "uk": "спустошення",
+    "kind": "Іменник"
+  },
+  {
+    "id": "word-91",
+    "form": "tron",
+    "base": "tron",
+    "uk": "трон",
+    "kind": "Іменник"
+  },
+  {
+    "id": "word-92",
+    "form": "rządy",
+    "base": "rządy",
+    "uk": "правління",
+    "kind": "Іменник"
+  },
+  {
+    "id": "word-93",
+    "form": "średniowiecza",
+    "base": "średniowiecze",
+    "uk": "середньовіччя",
+    "kind": "Іменник"
+  },
+  {
+    "id": "word-94",
+    "form": "uczelni",
+    "base": "uczelnia",
+    "uk": "заклад вищої освіти",
+    "kind": "Іменник"
+  },
+  {
+    "id": "word-95",
+    "form": "unia",
+    "base": "unia",
+    "uk": "унія; союз",
+    "kind": "Іменник"
+  },
+  {
+    "id": "word-96",
+    "form": "wróg",
+    "base": "wróg",
+    "uk": "ворог",
+    "kind": "Іменник"
+  },
+  {
+    "id": "word-97",
+    "form": "stolicę",
+    "base": "stolica",
+    "uk": "столиця",
+    "kind": "Іменник"
+  },
+  {
+    "id": "word-98",
+    "form": "dynastii",
+    "base": "dynastia",
+    "uk": "династія",
+    "kind": "Іменник"
+  },
+  {
+    "id": "word-99",
+    "form": "bitwę",
+    "base": "bitwa",
+    "uk": "битва",
+    "kind": "Іменник"
+  },
+  {
+    "id": "word-100",
+    "form": "wojska",
+    "base": "wojsko",
+    "uk": "військо",
+    "kind": "Іменник"
+  },
+  {
+    "id": "word-101",
+    "form": "pokój",
+    "base": "pokój",
+    "uk": "мир",
+    "kind": "Іменник"
+  },
+  {
+    "id": "word-102",
+    "form": "traktatem",
+    "base": "traktat",
+    "uk": "договір",
+    "kind": "Іменник"
+  },
+  {
+    "id": "word-103",
+    "form": "sekularyzacja",
+    "base": "sekularyzacja",
+    "uk": "секуляризація; перехід до світського устрою",
+    "kind": "Іменник"
+  },
+  {
+    "id": "word-104",
+    "form": "stuleciu",
+    "base": "stulecie",
+    "uk": "століття",
+    "kind": "Іменник"
+  },
+  {
+    "id": "word-105",
+    "form": "mocarstwa",
+    "base": "mocarstwo",
+    "uk": "велика держава",
+    "kind": "Іменник"
+  },
+  {
+    "id": "word-106",
+    "form": "mieszkańców",
+    "base": "mieszkaniec",
+    "uk": "мешканець",
+    "kind": "Іменник"
+  },
+  {
+    "id": "word-107",
+    "form": "zboże",
+    "base": "zboże",
+    "uk": "зерно; збіжжя",
+    "kind": "Іменник"
+  },
+  {
+    "id": "word-108",
+    "form": "żyto",
+    "base": "żyto",
+    "uk": "жито",
+    "kind": "Іменник"
+  },
+  {
+    "id": "word-109",
+    "form": "bydło",
+    "base": "bydło",
+    "uk": "велика рогата худоба",
+    "kind": "Іменник"
+  },
+  {
+    "id": "word-110",
+    "form": "futra",
+    "base": "futro",
+    "uk": "хутро",
+    "kind": "Іменник"
+  },
+  {
+    "id": "word-111",
+    "form": "panowaniem",
+    "base": "panowanie",
+    "uk": "панування; правління",
+    "kind": "Іменник"
+  },
+  {
+    "id": "word-112",
+    "form": "klęski",
+    "base": "klęska",
+    "uk": "поразка",
+    "kind": "Іменник"
+  },
+  {
+    "id": "word-113",
+    "form": "wydatki",
+    "base": "wydatek",
+    "uk": "витрата",
+    "kind": "Іменник"
+  },
+  {
+    "id": "word-114",
+    "form": "poseł",
+    "base": "poseł",
+    "uk": "депутат сейму",
+    "kind": "Іменник"
+  },
+  {
+    "id": "word-115",
+    "form": "obrad",
+    "base": "obrady",
+    "uk": "засідання; переговори",
+    "kind": "Іменник"
+  },
+  {
+    "id": "word-116",
+    "form": "uchwał",
+    "base": "uchwała",
+    "uk": "ухвала; постанова",
+    "kind": "Іменник"
+  },
+  {
+    "id": "word-117",
+    "form": "wolności",
+    "base": "wolność",
+    "uk": "свобода",
+    "kind": "Іменник"
+  },
+  {
+    "id": "word-118",
+    "form": "obrona",
+    "base": "obrona",
+    "uk": "оборона",
+    "kind": "Іменник"
+  },
+  {
+    "id": "word-119",
+    "form": "odsiecz",
+    "base": "odsiecz",
+    "uk": "військова допомога обложеним; відсіч",
+    "kind": "Іменник"
+  },
+  {
+    "id": "word-120",
+    "form": "upadek",
+    "base": "upadek",
+    "uk": "занепад; падіння",
+    "kind": "Іменник"
+  },
+  {
+    "id": "word-121",
+    "form": "rozbioru",
+    "base": "rozbiór",
+    "uk": "поділ (держави)",
+    "kind": "Іменник"
+  },
+  {
+    "id": "word-122",
+    "form": "dziedziczność",
+    "base": "dziedziczność",
+    "uk": "спадковість",
+    "kind": "Іменник"
+  },
+  {
+    "id": "word-123",
+    "form": "powstanie",
+    "base": "powstanie",
+    "uk": "повстання; виникнення",
+    "kind": "Іменник"
+  },
+  {
+    "id": "word-124",
+    "form": "zaborcom",
+    "base": "zaborca",
+    "uk": "загарбник (учасник поділів держави)",
+    "kind": "Іменник"
+  },
+  {
+    "id": "word-125",
+    "form": "niepodległość",
+    "base": "niepodległość",
+    "uk": "незалежність",
+    "kind": "Іменник"
+  },
+  {
+    "id": "word-126",
+    "form": "granice",
+    "base": "granica",
+    "uk": "кордон",
+    "kind": "Іменник"
+  },
+  {
+    "id": "word-127",
+    "form": "zamach",
+    "base": "zamach",
+    "uk": "замах; переворот (у сполученні zamach stanu)",
+    "kind": "Іменник"
+  },
+  {
+    "id": "word-128",
+    "form": "getto",
+    "base": "getto",
+    "uk": "гетто",
+    "kind": "Іменник"
+  },
+  {
+    "id": "word-129",
+    "form": "obozów",
+    "base": "obóz",
+    "uk": "табір",
+    "kind": "Іменник"
+  },
+  {
+    "id": "word-130",
+    "form": "suwerenności",
+    "base": "suwerenność",
+    "uk": "суверенітет",
+    "kind": "Іменник"
+  },
+  {
+    "id": "word-131",
+    "form": "gruzy",
+    "base": "gruzy",
+    "uk": "руїни; уламки",
+    "kind": "Іменник"
+  },
+  {
+    "id": "word-132",
+    "form": "porozumienie",
+    "base": "porozumienie",
+    "uk": "угода; порозуміння",
+    "kind": "Іменник"
+  },
+  {
+    "id": "word-133",
+    "form": "strajki",
+    "base": "strajk",
+    "uk": "страйк",
+    "kind": "Іменник"
+  },
+  {
+    "id": "word-134",
+    "form": "robotników",
+    "base": "robotnik",
+    "uk": "робітник",
+    "kind": "Іменник"
+  },
+  {
+    "id": "word-135",
+    "form": "odwilż",
+    "base": "odwilż",
+    "uk": "відлига (також політична)",
+    "kind": "Іменник"
+  },
+  {
+    "id": "word-136",
+    "form": "papieżem",
+    "base": "papież",
+    "uk": "папа римський",
+    "kind": "Іменник"
+  },
+  {
+    "id": "word-137",
+    "form": "pielgrzymek",
+    "base": "pielgrzymka",
+    "uk": "паломництво",
+    "kind": "Іменник"
+  },
+  {
+    "id": "word-138",
+    "form": "zwolenników",
+    "base": "zwolennik",
+    "uk": "прихильник",
+    "kind": "Іменник"
+  },
+  {
+    "id": "word-139",
+    "form": "przywódca",
+    "base": "przywódca",
+    "uk": "лідер; керівник",
+    "kind": "Іменник"
+  },
+  {
+    "id": "word-140",
+    "form": "obywateli",
+    "base": "obywatel",
+    "uk": "громадянин",
+    "kind": "Іменник"
+  },
+  {
+    "id": "word-141",
+    "form": "wybory",
+    "base": "wybory",
+    "uk": "вибори",
+    "kind": "Іменник"
+  },
+  {
+    "id": "word-142",
+    "form": "kadencję",
+    "base": "kadencja",
+    "uk": "термін повноважень",
+    "kind": "Іменник"
+  },
+  {
+    "id": "word-143",
+    "form": "stanowiska",
+    "base": "stanowisko",
+    "uk": "посада",
+    "kind": "Іменник"
+  },
+  {
+    "id": "word-144",
+    "form": "pogrzebie",
+    "base": "pogrzeb",
+    "uk": "похорон",
+    "kind": "Іменник"
+  },
+  {
+    "id": "word-145",
+    "form": "następca",
+    "base": "następca",
+    "uk": "наступник",
+    "kind": "Іменник"
+  },
+  {
+    "id": "word-146",
+    "form": "pogańskiego",
+    "base": "pogański",
+    "uk": "язичницький",
+    "kind": "Прикметник"
+  },
+  {
+    "id": "word-147",
+    "form": "wspólnemu",
+    "base": "wspólny",
+    "uk": "спільний",
+    "kind": "Прикметник"
+  },
+  {
+    "id": "word-148",
+    "form": "niepodległej",
+    "base": "niepodległy",
+    "uk": "незалежний",
+    "kind": "Прикметник"
+  },
+  {
+    "id": "word-149",
+    "form": "szlacheckiej",
+    "base": "szlachecki",
+    "uk": "шляхетський",
+    "kind": "Прикметник"
+  },
+  {
+    "id": "word-150",
+    "form": "dziedziczny",
+    "base": "dziedziczny",
+    "uk": "спадковий",
+    "kind": "Прикметник"
+  },
+  {
+    "id": "word-151",
+    "form": "sporne",
+    "base": "sporny",
+    "uk": "спірний",
+    "kind": "Прикметник"
+  },
+  {
+    "id": "word-152",
+    "form": "zbrojnej",
+    "base": "zbrojny",
+    "uk": "збройний",
+    "kind": "Прикметник"
+  },
+  {
+    "id": "word-153",
+    "form": "wojskowe",
+    "base": "wojskowy",
+    "uk": "військовий",
+    "kind": "Прикметник"
+  },
+  {
+    "id": "word-154",
+    "form": "obywatelskie",
+    "base": "obywatelski",
+    "uk": "громадянський",
+    "kind": "Прикметник"
+  },
+  {
+    "id": "word-155",
+    "form": "powojenny",
+    "base": "powojenny",
+    "uk": "післявоєнний",
+    "kind": "Прикметник"
+  },
+  {
+    "id": "word-156",
+    "form": "wewnętrznej",
+    "base": "wewnętrzny",
+    "uk": "внутрішній",
+    "kind": "Прикметник"
+  },
+  {
+    "id": "word-157",
+    "form": "zagranicznych",
+    "base": "zagraniczny",
+    "uk": "закордонний",
+    "kind": "Прикметник"
+  }
+]
