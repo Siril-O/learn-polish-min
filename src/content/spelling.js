@@ -452,6 +452,7 @@ export const spellingExercises = spellingItems.flatMap(
       };
       return {
         id: exerciseId,
+        familyId: `spelling-${id}`,
         topic: 'spelling',
         level,
         prompt: `Встав пропущену літеру або сполучення (${group}): ${gap}`,

@@ -24,6 +24,7 @@ import {
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './style.css';
 import Verbs from './Verbs.jsx';
+import { selectSessionExercises } from './session-selection.js';
 import { translate, useLanguage, setLanguage } from './interface-language.js';
 import {
   localizeLesson,
@@ -42,6 +43,7 @@ import {
   toggle,
   shuffle,
   advanceSession,
+  recordCompleted,
 } from './logic';
 const routes = [
   ['grammar', 'Граматика', BookOpen],
@@ -376,10 +378,20 @@ function Grammar({ selected, select, practice }) {
     </>
   );
 }
-function Practice({ initialTopic, initialVerbId, state, update }) {
+const historyGroups = [
+  ['all', 'Усі матеріали'],
+  ['chronology', 'Основна хронологія'],
+  ['history', 'Додаткові історичні дати'],
+  ['people', 'Люди та культура'],
+  ['places', 'Міста й пам’ятки'],
+  ['holidays', 'Свята й традиції'],
+];
+
+function Practice({ initialTopic, initialVerbId, initialHistoryGroup, state, update }) {
   const language = useLanguage();
   const [topic, setTopic] = useState(initialTopic || 'all');
   const [verbId, setVerbId] = useState(initialVerbId || '');
+  const [historyGroup, setHistoryGroup] = useState(initialHistoryGroup || 'all');
   const [level, setLevel] = useState('choice');
   const [count, setCount] = useState('10');
   const [session, setSession] = useState(null);
@@ -390,6 +402,8 @@ function Practice({ initialTopic, initialVerbId, state, update }) {
     if (topic === 'cases') return topics.some((t) => t.id === q.topic && t.group === 'Відмінки');
     if (topic === 'saved') return q.topic === 'vocabulary' && state.saved.includes(q.wordId);
     if (topic === 'verb-tables' && verbId) return q.topic === topic && q.verbId === verbId;
+    if (topic === 'history' && historyGroup !== 'all')
+      return q.topic === topic && q.historyCategory === historyGroup;
     return q.topic === topic;
   });
   const available = source.filter(
@@ -400,15 +414,29 @@ function Practice({ initialTopic, initialVerbId, state, update }) {
           ? level
           : Object.keys(levels).find((value) => source.some((item) => item.level === value))),
   );
+  const countLimit =
+    topic === 'mistakes'
+      ? available.length
+      : new Set(available.map((item) => item.familyId ?? item.id)).size;
+  const activeCount = Math.min(Number(count), countLimit);
+  const countOptions = [
+    ...new Set([
+      activeCount,
+      ...[5, 10, 20, 50].filter((value) => value <= countLimit),
+      Math.min(50, countLimit),
+    ]),
+  ].sort((a, b) => a - b);
   function start(list = available) {
     setRule(null);
+    const items =
+      list !== available || topic === 'mistakes'
+        ? shuffle(list).slice(0, Number(count))
+        : selectSessionExercises(list, activeCount, state.completed, allExercises);
     setSession({
-      items: shuffle(list)
-        .slice(0, Number(count))
-        .map((q) => ({
-          ...q,
-          options: q.options ? shuffle(q.options) : null,
-        })),
+      items: items.map((q) => ({
+        ...q,
+        options: q.options ? shuffle(q.options) : null,
+      })),
       index: 0,
       wrong: [],
       correct: 0,
@@ -418,6 +446,7 @@ function Practice({ initialTopic, initialVerbId, state, update }) {
   const activeLevel = supports.includes(level) ? level : supports[0];
   function changeTopic(value) {
     setVerbId('');
+    setHistoryGroup('all');
     setTopic(value);
     setLevel('choice');
     setSession(null);
@@ -483,6 +512,25 @@ function Practice({ initialTopic, initialVerbId, state, update }) {
                 </select>
               </div>
             )}
+            {topic === 'history' && (
+              <div>
+                <label className="form-label" htmlFor="practice-history-group">
+                  {translate('Набір дат')}
+                </label>
+                <select
+                  id="practice-history-group"
+                  className="form-select"
+                  value={historyGroup}
+                  onChange={(event) => setHistoryGroup(event.target.value)}
+                >
+                  {historyGroups.map(([id, label]) => (
+                    <option key={id} value={id}>
+                      {translate(label)}
+                    </option>
+                  ))}
+                </select>
+              </div>
+            )}
             <div>
               <label className="form-label" htmlFor="practice-level">
                 {translate('Складність')}
@@ -496,7 +544,7 @@ function Practice({ initialTopic, initialVerbId, state, update }) {
               >
                 {supports.map((l) => (
                   <option key={l} value={l}>
-                    {translate(levels[l])}
+                    {translate(levels[l])} ({source.filter((item) => item.level === l).length})
                   </option>
                 ))}
               </select>
@@ -508,11 +556,14 @@ function Practice({ initialTopic, initialVerbId, state, update }) {
               <select
                 id="practice-count"
                 className="form-select"
-                value={count}
+                value={activeCount}
+                disabled={!countLimit}
                 onChange={(e) => setCount(e.target.value)}
               >
-                {[5, 10, 20, 50].map((n) => (
-                  <option key={n}>{n}</option>
+                {countOptions.map((n) => (
+                  <option key={n} value={n}>
+                    {n}
+                  </option>
                 ))}
               </select>
             </div>
@@ -520,8 +571,11 @@ function Practice({ initialTopic, initialVerbId, state, update }) {
           <div className="session-start">
             <span className="text-secondary">
               {translate('Доступно: ')}
-              {available.length}
+              {countLimit}
               {translate(' завдань')}
+              {' · '}
+              {translate('У сесії: ')}
+              {activeCount}
             </span>
             <button
               className="btn btn-primary"
@@ -580,6 +634,7 @@ function Practice({ initialTopic, initialVerbId, state, update }) {
           checked={(item, correct) =>
             update((s) => ({
               ...s,
+              completed: recordCompleted(s.completed, item.id),
               mistakes: correct
                 ? s.mistakes.filter((id) => id !== item.id)
                 : [...new Set([...s.mistakes, item.id])],
@@ -751,7 +806,7 @@ function Quiz({ item, index, total, checked, next, exit, onRule }) {
         ) : (
           <>
             <label className="form-label small" htmlFor="written-answer">
-              {item.topic === 'history' ? translate('Рік') : translate('Твоя відповідь польською')}
+              {item.topic === 'history' ? translate('Дата') : translate('Твоя відповідь польською')}
             </label>
             <input
               ref={input}
@@ -763,9 +818,11 @@ function Quiz({ item, index, total, checked, next, exit, onRule }) {
               autoComplete="off"
               spellCheck={false}
               lang="pl"
-              inputMode={item.topic === 'history' ? 'numeric' : 'text'}
+              inputMode={
+                item.topic === 'history' && /^\d+$/.test(item.answers[0]) ? 'numeric' : 'text'
+              }
             />
-            {item.topic !== 'history' && (
+            {!(item.topic === 'history' && /^\d+$/.test(item.answers[0])) && (
               <div className="diacritics" aria-label={translate('Польські літери')}>
                 {'ąćęłńóśźż'.split('').map((l) => (
                   <button
@@ -814,6 +871,23 @@ function Quiz({ item, index, total, checked, next, exit, onRule }) {
           )}
         </div>
       )}
+      {item.attribution && (
+        <p className="small text-secondary mt-3 exercise-attribution">
+          <a href={item.attribution.url} target="_blank" rel="noreferrer">
+            Wikibooks: {item.attribution.title}
+          </a>
+          {' · '}
+          <a href={item.attribution.authorsUrl} target="_blank" rel="noreferrer">
+            {item.attribution.authors}
+          </a>
+          {' · '}
+          <a href={item.attribution.licenseUrl} target="_blank" rel="noreferrer">
+            {item.attribution.license}
+          </a>
+          {' · '}
+          {translate('Адаптовано: пропуски, варіанти відповідей і український переклад.')}
+        </p>
+      )}
       <div className="quiz-bottom">
         {topic && (
           <button
@@ -838,12 +912,71 @@ function Quiz({ item, index, total, checked, next, exit, onRule }) {
     </div>
   );
 }
+function HistoryPagination({ page, count, total, onChange }) {
+  return (
+    <nav
+      className="d-flex align-items-center gap-3 my-3"
+      aria-label={translate('Сторінки матеріалів')}
+    >
+      <button
+        type="button"
+        className="btn btn-outline-secondary btn-sm"
+        disabled={page === 0}
+        onClick={() => onChange(page - 1)}
+        aria-label={translate('Попередня сторінка')}
+        title={translate('Попередня сторінка')}
+      >
+        <ChevronLeft size={18} />
+      </button>
+      <span className="small text-secondary">
+        {page + 1} / {count} · {total} {translate('записів')}
+      </span>
+      <button
+        type="button"
+        className="btn btn-outline-secondary btn-sm"
+        disabled={page + 1 === count}
+        onClick={() => onChange(page + 1)}
+        aria-label={translate('Наступна сторінка')}
+        title={translate('Наступна сторінка')}
+      >
+        <ChevronRight size={18} />
+      </button>
+    </nav>
+  );
+}
+
 function Karta({ practice }) {
   const language = useLanguage();
   const historyEntries = history.map((entry) => localizeHistory(entry, language, content));
   const interviewEntries = interview.map((entry) => localizeInterview(entry, language, content));
   const [tab, setTab] = useState('history');
   const [search, setSearch] = useState('');
+  const [historyGroup, setHistoryGroup] = useState('all');
+  const [historyPage, setHistoryPage] = useState(0);
+  const historyList = useRef(null);
+  const scrollAfterPagination = useRef(false);
+  useEffect(() => {
+    if (!scrollAfterPagination.current) return;
+    scrollAfterPagination.current = false;
+    historyList.current?.scrollIntoView({ block: 'start', behavior: 'instant' });
+  }, [historyPage]);
+  function changeHistoryPage(page) {
+    scrollAfterPagination.current = true;
+    setHistoryPage(page);
+  }
+  const matchingHistory = historyEntries.filter(
+    (entry) =>
+      (historyGroup === 'all' || entry.category === historyGroup) &&
+      `${entry.year} ${entry.originalYear || ''} ${entry.title} ${entry.pl} ${entry.uk} ${entry.original} ${entry.originalUk || ''}`
+        .toLowerCase()
+        .includes(search.toLowerCase()),
+  );
+  const historyPageCount = Math.max(1, Math.ceil(matchingHistory.length / 20));
+  const activeHistoryPage = Math.min(historyPage, historyPageCount - 1);
+  const visibleHistory = matchingHistory.slice(
+    activeHistoryPage * 20,
+    (activeHistoryPage + 1) * 20,
+  );
   return (
     <>
       <Heading
@@ -878,58 +1011,100 @@ function Karta({ practice }) {
                 placeholder={translate('Дата або подія…')}
                 aria-label={translate('Знайти історичну подію')}
                 value={search}
-                onChange={(e) => setSearch(e.target.value)}
+                onChange={(e) => {
+                  setSearch(e.target.value);
+                  setHistoryPage(0);
+                }}
               />
             </label>
-            <button className="btn btn-primary" onClick={() => practice('history')}>
+            <label>
+              <span className="form-label small">{translate('Набір дат')}</span>
+              <select
+                className="form-select"
+                value={historyGroup}
+                onChange={(event) => {
+                  setHistoryGroup(event.target.value);
+                  setHistoryPage(0);
+                }}
+                aria-label={translate('Набір дат')}
+              >
+                {historyGroups.map(([id, label]) => (
+                  <option key={id} value={id}>
+                    {translate(label)}
+                  </option>
+                ))}
+              </select>
+            </label>
+            <button
+              className="btn btn-primary"
+              onClick={() => practice('history', '', historyGroup)}
+            >
               {translate('Тест на дати й події ')}
               <ArrowRight size={17} />
             </button>
           </div>
-          <div className="history-list">
-            {historyEntries
-              .filter((h) =>
-                `${h.year} ${h.title} ${h.uk}`.toLowerCase().includes(search.toLowerCase()),
-              )
-              .map((h) => (
-                <article className="history-item" key={h.id}>
-                  <div className="history-year">
-                    {h.year}
-                    {h.date && <span lang="pl">{h.date.replace(` ${h.year}`, '')}</span>}
-                  </div>
-                  <div>
-                    <h2 lang="pl">{h.title}</h2>
-                    <p className="history-polish" lang="pl">
-                      {h.pl}
+          <HistoryPagination
+            page={activeHistoryPage}
+            count={historyPageCount}
+            total={matchingHistory.length}
+            onChange={changeHistoryPage}
+          />
+          <div className="history-list" ref={historyList}>
+            {visibleHistory.map((h) => (
+              <article className="history-item" key={h.id}>
+                <div className={`history-year ${h.year.length > 4 ? 'is-long' : ''}`}>
+                  {h.originalYear || h.year}
+                  {h.date && <span lang="pl">{h.date.replace(` ${h.year}`, '')}</span>}
+                </div>
+                <div>
+                  <h2 lang="pl">{h.title}</h2>
+                  <h3 className="h6 text-secondary">{translate('Оригінал наданого тексту')}</h3>
+                  <p className="history-polish" lang="pl">
+                    {h.original || h.pl}
+                  </p>
+                  <details>
+                    <summary>
+                      {translate(
+                        h.originalUk ? 'Переклад оригіналу українською' : 'Український переклад',
+                      )}
+                    </summary>
+                    <p className="mt-2" lang="uk">
+                      {h.originalUk || h.uk}
                     </p>
+                  </details>
+                  {h.original && (
                     <details>
-                      <summary>{translate('Український переклад')}</summary>
-                      <p className="mt-2">{h.uk}</p>
-                    </details>
-                    {h.original && (
-                      <details>
-                        <summary>{translate('Оригінал наданого тексту')}</summary>
-                        <blockquote lang="pl" className="original-text">
-                          {h.original}
-                        </blockquote>
-                        {h.note && (
-                          <p className="correction-note">
-                            <strong>{translate('Уточнення:')}</strong> {h.note}
-                          </p>
-                        )}
+                      <summary>{translate('Спрощений текст · повний зміст')}</summary>
+                      <p lang="pl" className="mt-2 simplified-text">
+                        {h.pl}
+                      </p>
+                      <details className="mb-3">
+                        <summary>{translate('Український переклад')}</summary>
+                        <p className="mt-2" lang="uk">
+                          {h.uk}
+                        </p>
                       </details>
-                    )}
+                    </details>
+                  )}
+                  {!h.sourceDocument && (
                     <a className="source-link" href={h.source} target="_blank" rel="noreferrer">
                       {translate('Джерело ')}
                       <ExternalLink size={13} />
                     </a>
-                  </div>
-                </article>
-              ))}
+                  )}
+                </div>
+              </article>
+            ))}
           </div>
-          {!history.some((h) =>
-            `${h.year} ${h.title} ${h.uk}`.toLowerCase().includes(search.toLowerCase()),
-          ) && <p className="empty-state text-secondary">{translate('Подій не знайдено.')}</p>}
+          <HistoryPagination
+            page={activeHistoryPage}
+            count={historyPageCount}
+            total={matchingHistory.length}
+            onChange={changeHistoryPage}
+          />
+          {!matchingHistory.length && (
+            <p className="empty-state text-secondary">{translate('Подій не знайдено.')}</p>
+          )}
         </>
       )}
       {tab === 'interview' && (
@@ -1295,7 +1470,7 @@ function SettingsPage({ state, update, warning }) {
         <h2>{translate('Збереження у браузері')}</h2>
         <p className="text-secondary">
           {translate(
-            'Зберігаються остання тема, збережені й вивчені слова та помилки. Дані залишаються в цьому браузері й не надсилаються на сервер. Видалення даних сайту також видалить збереження.',
+            'Зберігаються остання тема, збережені й вивчені слова, помилки та історія виконаних вправ. Дані залишаються в цьому браузері й не надсилаються на сервер. Видалення даних сайту також видалить збереження.',
           )}
         </p>
         <dl className="storage-stats">
@@ -1310,6 +1485,10 @@ function SettingsPage({ state, update, warning }) {
           <div>
             <dt>{translate('Помилки')}</dt>
             <dd>{state.mistakes.length}</dd>
+          </div>
+          <div>
+            <dt>{translate('Виконані вправи')}</dt>
+            <dd>{state.completed.length}</dd>
           </div>
         </dl>
         {warning && <div className="alert alert-warning">{translate(warning)}</div>}
@@ -1381,7 +1560,7 @@ function SettingsPage({ state, update, warning }) {
         </ul>
         <p className="small text-secondary">
           {translate(
-            'Історичні події мають окремі посилання на джерела. Приклади та вправи створені для цього застосунку. Приклади співбесіди є тренувальними, а не офіційним переліком питань.',
+            'Історичні події мають окремі посилання на джерела. Адаптовані вправи з Wikibooks містять посилання на авторів і ліцензію CC BY-SA 4.0. Приклади співбесіди є тренувальними, а не офіційним переліком питань.',
           )}
         </p>
       </div>
@@ -1414,6 +1593,7 @@ function App() {
   const [view, setView] = useState(routeFromHash() || initial.state.lastView);
   const [practiceTopic, setPracticeTopic] = useState('all');
   const [practiceVerbId, setPracticeVerbId] = useState('');
+  const [practiceHistoryGroup, setPracticeHistoryGroup] = useState('all');
   const [practiceKey, setPracticeKey] = useState(0);
   useEffect(() => {
     try {
@@ -1449,7 +1629,8 @@ function App() {
       top: 0,
     });
   }
-  function practice(topic, verbId = '') {
+  function practice(topic, verbId = '', historyGroup = 'all') {
+    setPracticeHistoryGroup(historyGroup);
     setPracticeVerbId(verbId);
     setPracticeTopic(topic);
     setPracticeKey((n) => n + 1);
@@ -1525,6 +1706,7 @@ function App() {
               key={practiceKey}
               initialTopic={practiceTopic}
               initialVerbId={practiceVerbId}
+              initialHistoryGroup={practiceHistoryGroup}
               state={state}
               update={update}
             />

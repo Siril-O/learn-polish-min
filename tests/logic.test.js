@@ -111,6 +111,7 @@ test('backup sanitation prunes unknown IDs, deduplicates and does not mutate inp
     saved: ['word'],
     known: ['word'],
     mistakes: ['grammar-write'],
+    completed: [],
   });
   assert.deepEqual(input, original);
 });

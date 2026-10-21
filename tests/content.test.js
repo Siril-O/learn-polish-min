@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import * as content from '../src/content/index.js';
-import originals from '../src/original-history.json' with { type: 'json' };
+import { historyOriginals } from '../src/content/history-complete.js';
 
 const normalize = (value) =>
   value
@@ -15,7 +15,7 @@ const unique = (values) => assert.equal(new Set(values).size, values.length);
 test('the entry point preserves collections and centralizes every exercise', () => {
   assert.equal(content.contentVersion, 1);
   assert.equal(content.topics.length, 19);
-  assert.equal(content.history.length, 13);
+  assert.equal(content.history.filter((entry) => entry.category === 'chronology').length, 54);
   assert.equal(content.vocabulary.length, 158);
   assert.deepEqual(content.allExercises, [
     ...content.grammarExercises,
@@ -151,18 +151,22 @@ test('history practice uses corrected facts while retaining the original archive
   for (const entry of content.history) {
     assert.equal(
       entry.original,
-      originals[entry.year] ?? (entry.year === '1999' ? originals['1998'] : '') ?? '',
+      entry.originalKey
+        ? historyOriginals[entry.originalKey]
+        : entry.sourceDocument
+          ? entry.original
+          : '',
     );
     assert.equal(new URL(entry.source).protocol, 'https:');
     const exercises = content.historyExercises.filter((exercise) =>
-      exercise.id.startsWith(`${entry.id}-`),
+      ['year', 'write', 'event'].some((suffix) => exercise.id === `${entry.id}-${suffix}`),
     );
     assert.deepEqual(
       exercises.map((exercise) => exercise.level),
       ['choice', 'write', 'event'],
     );
     assert.deepEqual(exercises[0].answers, [entry.year]);
-    assert.deepEqual(exercises[1].answers, [entry.year]);
+    assert.ok(exercises[1].answers.includes(entry.year));
     assert.deepEqual(exercises[2].answers, [entry.title]);
     assert.equal(exercises[0].explanation, `${entry.pl} ${entry.uk}`);
     assert.equal(exercises[1].explanation, `${entry.pl} ${entry.uk}`);

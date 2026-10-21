@@ -5,6 +5,7 @@ export const defaults = (bundle) => ({
   saved: [],
   known: [],
   mistakes: [],
+  completed: [],
   lastView: 'grammar',
 });
 export function normalize(value) {
@@ -32,6 +33,13 @@ export function validateBackup(data, bundle) {
       throw new Error('Invalid learning data');
   }
   if (
+    data.completed !== undefined &&
+    (!Array.isArray(data.completed) ||
+      data.completed.length > 10000 ||
+      data.completed.some((id) => typeof id !== 'string' || !id.length || id.length > 160))
+  )
+    throw new Error('Invalid exercise history');
+  if (
     typeof data.topic !== 'string' ||
     !data.topic.length ||
     data.topic.length > 160 ||
@@ -43,6 +51,7 @@ export function validateBackup(data, bundle) {
     topic: data.topic,
     lastView: data.lastView,
     ...Object.fromEntries(['saved', 'known', 'mistakes'].map((k) => [k, [...new Set(data[k])]])),
+    completed: [...new Set(data.completed ?? [])],
   };
   if (bundle) {
     const words = new Set(bundle.vocabulary.map((w) => w.id));
@@ -53,6 +62,7 @@ export function validateBackup(data, bundle) {
     result.saved = result.saved.filter((id) => words.has(id));
     result.known = result.known.filter((id) => words.has(id));
     result.mistakes = result.mistakes.filter((id) => exercises.has(id));
+    result.completed = result.completed.filter((id) => exercises.has(id));
   }
   return result;
 }
@@ -80,11 +90,15 @@ export function advanceSession(session, index, correct) {
 export function toggle(list, id) {
   return list.includes(id) ? list.filter((x) => x !== id) : [...list, id];
 }
-export function shuffle(items) {
+export function shuffle(items, random = Math.random) {
   const result = [...items];
   for (let i = result.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
+    const j = Math.floor(random() * (i + 1));
     [result[i], result[j]] = [result[j], result[i]];
   }
   return result;
+}
+
+export function recordCompleted(completed, id) {
+  return [...completed.filter((item) => item !== id), id].slice(-10000);
 }

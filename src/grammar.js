@@ -49,7 +49,7 @@ export const topics = [
       row(
         'Ja ___ z Ukrainy.',
         'jestem',
-        ['jest', 'jestem', 'jesteś'],
+        ['jest', 'jestem', 'jesteś', 'jesteśmy', 'jesteście'],
         'Я з України.',
         'Jestem z Ukrainy.',
         'Для ja вживаємо jestem.',
@@ -58,7 +58,7 @@ export const topics = [
       row(
         'Ty ___ w domu.',
         'jesteś',
-        ['jestem', 'jesteś', 'są'],
+        ['jestem', 'jesteś', 'są', 'jest', 'jesteśmy'],
         'Ти вдома.',
         'Jesteś w domu.',
         'Для ty потрібна форма jesteś.',
@@ -67,7 +67,7 @@ export const topics = [
       row(
         'My ___ w Polsce.',
         'jesteśmy',
-        ['jesteście', 'są', 'jesteśmy'],
+        ['jesteście', 'są', 'jesteśmy', 'jestem', 'jesteś'],
         'Ми в Польщі.',
         'Jesteśmy w Polsce.',
         'My → jesteśmy.',
@@ -76,7 +76,7 @@ export const topics = [
       row(
         'One ___ gotowe.',
         'są',
-        ['jest', 'są', 'jesteś'],
+        ['jest', 'są', 'jesteś', 'jesteśmy', 'jesteście'],
         'Вони готові. (жінки)',
         'One są gotowe.',
         'One вимагає są; готові жінки → gotowe.',
@@ -111,7 +111,7 @@ export const topics = [
       row(
         '___ jest duży. (ten dom)',
         'Ten dom',
-        ['Ten dom', 'Ta dom', 'To dom'],
+        ['Ten dom', 'Ta dom', 'To dom', 'Tego domu', 'Tym domem'],
         'Цей будинок великий.',
         'Ten dom jest duży.',
         'Dom має чоловічий рід.',
@@ -119,7 +119,7 @@ export const topics = [
       row(
         '___ jest otwarte. (to okno)',
         'To okno',
-        ['Ta okno', 'Ten okno', 'To okno'],
+        ['Ta okno', 'Ten okno', 'To okno', 'Tego okna', 'Tym oknem'],
         'Це вікно відчинене.',
         'To okno jest otwarte.',
         'Okno має середній рід.',
@@ -127,7 +127,7 @@ export const topics = [
       row(
         'Te ___ są nowe. (książka)',
         'książki',
-        ['książki', 'książkę', 'książka'],
+        ['książki', 'książkę', 'książka', 'książką', 'książek'],
         'Ці книжки нові.',
         'Te książki są nowe.',
         'Називний множини: książka → książki.',
@@ -135,7 +135,7 @@ export const topics = [
       row(
         'Ci ___ są mili. (student)',
         'studenci',
-        ['studenty', 'studenci', 'studentów'],
+        ['studenty', 'studenci', 'studentów', 'studentom', 'studentami'],
         'Ці студенти привітні.',
         'Ci studenci są mili.',
         'Чоловічо-особова множина: student → studenci.',
@@ -170,7 +170,7 @@ export const topics = [
       row(
         'Ja ___ książkę. (czytać)',
         'czytam',
-        ['czyta', 'czytam', 'czytasz'],
+        ['czyta', 'czytam', 'czytasz', 'czytamy', 'czytacie'],
         'Я читаю книжку.',
         'Czytam książkę.',
         'Czytać: ja czytam.',
@@ -179,7 +179,7 @@ export const topics = [
       row(
         'Ty ___ po polsku. (mówić)',
         'mówisz',
-        ['mówię', 'mówi', 'mówisz'],
+        ['mówię', 'mówi', 'mówisz', 'mówimy', 'mówicie'],
         'Ти говориш польською.',
         'Mówisz po polsku.',
         'Mówić: ty mówisz.',
@@ -188,7 +188,7 @@ export const topics = [
       row(
         'My ___ w domu. (mieszkać)',
         'mieszkamy',
-        ['mieszkają', 'mieszkamy', 'mieszka'],
+        ['mieszkają', 'mieszkamy', 'mieszka', 'mieszkasz', 'mieszkacie'],
         'Ми живемо в будинку.',
         'Mieszkamy w domu.',
         'Mieszkać: my mieszkamy.',
@@ -197,7 +197,7 @@ export const topics = [
       row(
         'Oni ___ list. (pisać)',
         'piszą',
-        ['piszą', 'pisze', 'piszemy'],
+        ['piszą', 'pisze', 'piszemy', 'piszesz', 'piszecie'],
         'Вони пишуть лист.',
         'Oni piszą list.',
         'Pisać: piszę, piszesz, piszą.',
@@ -232,7 +232,7 @@ export const topics = [
       row(
         'To jest ___ książka. (nowy)',
         'nowa',
-        ['nowy', 'nowe', 'nowa'],
+        ['nowy', 'nowe', 'nowa', 'nową', 'nowej'],
         'Це нова книжка.',
         'To jest nowa książka.',
         'Książka має жіночий рід.',
@@ -240,7 +240,7 @@ export const topics = [
       row(
         'To jest ___ okno. (duży)',
         'duże',
-        ['duży', 'duże', 'duża'],
+        ['duży', 'duże', 'duża', 'dużego', 'dużemu'],
         'Це велике вікно.',
         'To jest duże okno.',
         'Okno має середній рід.',
@@ -248,7 +248,7 @@ export const topics = [
       row(
         'To są ___ domy. (nowy)',
         'nowe',
-        ['nowi', 'nowe', 'nowy'],
+        ['nowi', 'nowe', 'nowy', 'nowych', 'nowymi'],
         'Це нові будинки.',
         'To są nowe domy.',
         'Domy — нечоловічо-особова множина.',
@@ -256,7 +256,7 @@ export const topics = [
       row(
         'To są ___ studenci. (miły)',
         'mili',
-        ['miłe', 'mili', 'miły'],
+        ['miłe', 'mili', 'miły', 'miłego', 'miłymi'],
         'Це привітні студенти.',
         'To są mili studenci.',
         'Studenci вимагає чоловічо-особової форми mili.',
@@ -289,7 +289,7 @@ export const topics = [
       row(
         'To jest ___. (nauczyciel)',
         'nauczyciel',
-        ['nauczyciel', 'nauczycielem', 'nauczyciela'],
+        ['nauczyciel', 'nauczycielem', 'nauczyciela', 'nauczycielowi', 'nauczycielu'],
         'Це вчитель.',
         'To jest nauczyciel.',
         'Після to jest тут називний.',
@@ -297,7 +297,7 @@ export const topics = [
       row(
         '___ czyta książkę. (student)',
         'Student',
-        ['Student', 'Studenta', 'Studentem'],
+        ['Student', 'Studenta', 'Studentem', 'Studentowi', 'Studentach'],
         'Студент читає книжку.',
         'Student czyta książkę.',
         'Підмет: kto czyta? student.',
@@ -305,7 +305,7 @@ export const topics = [
       row(
         'To są ___. (nowe okno, liczba mnoga)',
         'nowe okna',
-        ['nowe okna', 'nowych okien', 'nowymi oknami'],
+        ['nowe okna', 'nowych okien', 'nowymi oknami', 'nowym oknom', 'nowych oknach'],
         'Це нові вікна.',
         'To są nowe okna.',
         'Називний множини: nowe okna.',
@@ -313,7 +313,7 @@ export const topics = [
       row(
         'To jest ___. (moja siostra)',
         'moja siostra',
-        ['moją siostrę', 'mojej siostry', 'moja siostra'],
+        ['moją siostrę', 'mojej siostry', 'moja siostra', 'mojej siostrze', 'moją siostrą'],
         'Це моя сестра.',
         'To jest moja siostra.',
         'Після to jest: moja siostra.',
@@ -346,7 +346,13 @@ export const topics = [
       row(
         'Nie mam ___. (nowy telefon)',
         'nowego telefonu',
-        ['nowy telefon', 'nowego telefonu', 'nowym telefonem'],
+        [
+          'nowy telefon',
+          'nowego telefonu',
+          'nowym telefonem',
+          'nowemu telefonowi',
+          'nowym telefonie',
+        ],
         'Я не маю нового телефона.',
         'Nie mam nowego telefonu.',
         'Заперечений прямий додаток → родовий: nowego telefonu.',
@@ -354,7 +360,7 @@ export const topics = [
       row(
         'Szukam ___. (brat)',
         'brata',
-        ['brat', 'bratem', 'brata'],
+        ['brat', 'bratem', 'brata', 'bratu', 'bracie'],
         'Я шукаю брата.',
         'Szukam brata.',
         'Szukać kogo? → родовий.',
@@ -363,7 +369,7 @@ export const topics = [
       row(
         'Idę do ___. (szkoła)',
         'szkoły',
-        ['szkołę', 'szkoły', 'szkołą'],
+        ['szkołę', 'szkoły', 'szkołą', 'szkoła', 'szkołom'],
         'Я йду до школи.',
         'Idę do szkoły.',
         'Do + родовий: szkoły.',
@@ -372,7 +378,7 @@ export const topics = [
       row(
         'Potrzebuję ___. (dużo czasu)',
         'dużo czasu',
-        ['dużo czas', 'dużo czasu', 'duży czas'],
+        ['dużo czas', 'dużo czasu', 'duży czas', 'dużemu czasowi', 'dużym czasem'],
         'Я потребую багато часу.',
         'Potrzebuję dużo czasu.',
         'Potrzebować і dużo поєднуються з родовим; czas → czasu.',
@@ -380,7 +386,13 @@ export const topics = [
       row(
         'Nie mam ___. (nowe książki)',
         'nowych książek',
-        ['nowe książki', 'nowych książek', 'nowymi książkami'],
+        [
+          'nowe książki',
+          'nowych książek',
+          'nowymi książkami',
+          'nowym książkom',
+          'nowych książkach',
+        ],
         'Я не маю нових книжок.',
         'Nie mam nowych książek.',
         'Родовий множини: nowych książek.',
@@ -413,7 +425,7 @@ export const topics = [
       row(
         'Pomagam ___. (brat)',
         'bratu',
-        ['brata', 'bratem', 'bratu'],
+        ['brata', 'bratem', 'bratu', 'brat', 'bracie'],
         'Я допомагаю братові.',
         'Pomagam bratu.',
         'Pomagać komu? Brat → bratu.',
@@ -422,7 +434,7 @@ export const topics = [
       row(
         'Dziękuję ___. (nauczyciel)',
         'nauczycielowi',
-        ['nauczycielowi', 'nauczyciela', 'nauczycielem'],
+        ['nauczycielowi', 'nauczyciela', 'nauczycielem', 'nauczyciel', 'nauczycielu'],
         'Я дякую вчителеві.',
         'Dziękuję nauczycielowi.',
         'Dziękować komu? → celownik.',
@@ -430,7 +442,7 @@ export const topics = [
       row(
         'Daję ___ książkę. (dziecko)',
         'dziecku',
-        ['dziecko', 'dziecka', 'dziecku'],
+        ['dziecko', 'dziecka', 'dziecku', 'dzieckiem', 'dzieci'],
         'Я даю дитині книжку.',
         'Daję dziecku książkę.',
         'Dziecko → dziecku; книжка — знахідний.',
@@ -438,7 +450,13 @@ export const topics = [
       row(
         'Pomagam ___. (nowi studenci)',
         'nowym studentom',
-        ['nowych studentów', 'nowym studentom', 'nowymi studentami'],
+        [
+          'nowych studentów',
+          'nowym studentom',
+          'nowymi studentami',
+          'nowi studenci',
+          'nowych studentach',
+        ],
         'Я допомагаю новим студентам.',
         'Pomagam nowym studentom.',
         'Давальний множини: -ym у прикметника, -om в іменника.',
@@ -471,7 +489,7 @@ export const topics = [
       row(
         'Mam ___. (nowa książka)',
         'nową książkę',
-        ['nowej książki', 'nową książkę', 'nową książką'],
+        ['nowej książki', 'nową książkę', 'nową książką', 'nowa książka', 'nowej książce'],
         'Я маю нову книжку.',
         'Mam nową książkę.',
         'Mam co? → знахідний; -ą та -ę.',
@@ -480,7 +498,7 @@ export const topics = [
       row(
         'Widzę ___. (brat)',
         'brata',
-        ['brat', 'bratu', 'brata'],
+        ['brat', 'bratu', 'brata', 'bratem', 'bracie'],
         'Я бачу брата.',
         'Widzę brata.',
         'Чоловічий живий у знахідному має форму родового.',
@@ -489,7 +507,13 @@ export const topics = [
       row(
         'Mam ___. (nowy telefon)',
         'nowy telefon',
-        ['nowy telefon', 'nowego telefonu', 'nowym telefonem'],
+        [
+          'nowy telefon',
+          'nowego telefonu',
+          'nowym telefonem',
+          'nowemu telefonowi',
+          'nowym telefonie',
+        ],
         'Я маю новий телефон.',
         'Mam nowy telefon.',
         'Чоловічий неживий: знахідний як називний.',
@@ -498,7 +522,13 @@ export const topics = [
       row(
         'Widzę ___. (nowi studenci)',
         'nowych studentów',
-        ['nowi studenci', 'nowych studentów', 'nowym studentom'],
+        [
+          'nowi studenci',
+          'nowych studentów',
+          'nowym studentom',
+          'nowymi studentami',
+          'nowych studentach',
+        ],
         'Я бачу нових студентів.',
         'Widzę nowych studentów.',
         'Чоловічо-особова множина у знахідному як родовий.',
@@ -506,7 +536,7 @@ export const topics = [
       row(
         'Lubię ___. (te koty)',
         'te koty',
-        ['tych kotów', 'tymi kotami', 'te koty'],
+        ['tych kotów', 'tymi kotami', 'te koty', 'tym kotom', 'tych kotach'],
         'Я люблю цих котів.',
         'Lubię te koty.',
         'Тварини у множині не чоловічо-особові: знахідний як називний.',
@@ -539,7 +569,7 @@ export const topics = [
       row(
         'Jestem ___. (nauczyciel)',
         'nauczycielem',
-        ['nauczyciel', 'nauczyciela', 'nauczycielem'],
+        ['nauczyciel', 'nauczyciela', 'nauczycielem', 'nauczycielowi', 'nauczycielu'],
         'Я вчитель.',
         'Jestem nauczycielem.',
         'Професія після jestem — орудний.',
@@ -548,7 +578,13 @@ export const topics = [
       row(
         'Rozmawiam z ___. (nowy nauczyciel)',
         'nowym nauczycielem',
-        ['nowy nauczyciel', 'nowego nauczyciela', 'nowym nauczycielem'],
+        [
+          'nowy nauczyciel',
+          'nowego nauczyciela',
+          'nowym nauczycielem',
+          'nowemu nauczycielowi',
+          'nowym nauczycielu',
+        ],
         'Я розмовляю з новим учителем.',
         'Rozmawiam z nowym nauczycielem.',
         'Z kim? → орудний; змінюємо обидва слова.',
@@ -556,7 +592,7 @@ export const topics = [
       row(
         'Jadę ___. (autobus)',
         'autobusem',
-        ['autobusu', 'autobus', 'autobusem'],
+        ['autobusu', 'autobus', 'autobusem', 'autobusowi', 'autobusie'],
         'Я їду автобусом.',
         'Jadę autobusem.',
         'Транспорт без прийменника: narzędnik.',
@@ -565,7 +601,13 @@ export const topics = [
       row(
         'Idę z ___. (dobre koleżanki)',
         'dobrymi koleżankami',
-        ['dobre koleżanki', 'dobrymi koleżankami', 'dobrych koleżanek'],
+        [
+          'dobre koleżanki',
+          'dobrymi koleżankami',
+          'dobrych koleżanek',
+          'dobrym koleżankom',
+          'dobrych koleżankach',
+        ],
         'Я йду з добрими подругами.',
         'Idę z dobrymi koleżankami.',
         'Орудний множини: dobrymi koleżankami.',
@@ -598,7 +640,7 @@ export const topics = [
       row(
         'Mieszkam w ___. (Polska)',
         'Polsce',
-        ['Polskę', 'Polski', 'Polsce'],
+        ['Polskę', 'Polski', 'Polsce', 'Polska', 'Polską'],
         'Я живу в Польщі.',
         'Mieszkam w Polsce.',
         'W + місце → місцевий: Polsce.',
@@ -607,7 +649,7 @@ export const topics = [
       row(
         'Czytam o ___. (historia)',
         'historii',
-        ['historię', 'historii', 'historią'],
+        ['historię', 'historii', 'historią', 'historia', 'historio'],
         'Я читаю про історію.',
         'Czytam o historii.',
         'O czym? → місцевий; historia → historii.',
@@ -615,7 +657,7 @@ export const topics = [
       row(
         'Jestem w ___. (małe miasto)',
         'małym mieście',
-        ['małe miasto', 'małego miasta', 'małym mieście'],
+        ['małe miasto', 'małego miasta', 'małym mieście', 'małemu miastu', 'małym miastem'],
         'Я в маленькому місті.',
         'Jestem w małym mieście.',
         'Змінюємо прикметник і основу іменника: miasto → mieście.',
@@ -623,7 +665,13 @@ export const topics = [
       row(
         'Rozmawiamy o ___. (nowe książki)',
         'nowych książkach',
-        ['nowe książki', 'nowych książkach', 'nowymi książkami'],
+        [
+          'nowe książki',
+          'nowych książkach',
+          'nowymi książkami',
+          'nowych książek',
+          'nowym książkom',
+        ],
         'Ми розмовляємо про нові книжки.',
         'Rozmawiamy o nowych książkach.',
         'Місцевий множини: -ych та -ach.',
@@ -659,7 +707,7 @@ export const topics = [
       row(
         '___, chodź tutaj! (mama, wołacz)',
         'Mamo',
-        ['Mama', 'Mamę', 'Mamo'],
+        ['Mama', 'Mamę', 'Mamo', 'Mamie', 'Mamą'],
         'Мамо, підійди сюди!',
         'Mamo, chodź tutaj!',
         'Звертання: mama → mamo.',
@@ -667,7 +715,13 @@ export const topics = [
       row(
         'Dzień dobry, ___! (pan profesor)',
         'panie profesorze',
-        ['pan profesor', 'panie profesorze', 'pana profesora'],
+        [
+          'pan profesor',
+          'panie profesorze',
+          'pana profesora',
+          'panu profesorowi',
+          'panem profesorem',
+        ],
         'Добрий день, пане професоре!',
         'Dzień dobry, panie profesorze!',
         'Кличний у двох словах.',
@@ -675,7 +729,7 @@ export const topics = [
       row(
         '___, dziękuję! (Kasia, wołacz)',
         'Kasiu',
-        ['Kasia', 'Kasię', 'Kasiu'],
+        ['Kasia', 'Kasię', 'Kasiu', 'Kasi', 'Kasią'],
         'Касю, дякую!',
         'Kasiu, dziękuję!',
         'Пестливе ім’я Kasia → Kasiu.',
@@ -683,7 +737,7 @@ export const topics = [
       row(
         'Drogi ___, witaj! (przyjaciel)',
         'przyjacielu',
-        ['przyjaciela', 'przyjacielu', 'przyjacielem'],
+        ['przyjaciela', 'przyjacielu', 'przyjacielem', 'przyjacielowi', 'przyjaciele'],
         'Дорогий друже, вітаю!',
         'Drogi przyjacielu, witaj!',
         'Звертання: przyjacielu.',
@@ -718,7 +772,7 @@ export const topics = [
       row(
         'Wczoraj ___ książkę. (ja, mężczyzna, czytać)',
         'czytałem',
-        ['czytałam', 'czytałem', 'czytał'],
+        ['czytałam', 'czytałem', 'czytał', 'czytałeś', 'czytaliśmy'],
         'Учора я читав книжку.',
         'Wczoraj czytałem książkę.',
         'Чоловік, ja → czytałem.',
@@ -727,7 +781,7 @@ export const topics = [
       row(
         'Wczoraj ___ w domu. (ja, kobieta, być)',
         'byłam',
-        ['byłem', 'była', 'byłam'],
+        ['byłem', 'była', 'byłam', 'byłaś', 'byłyśmy'],
         'Учора я була вдома.',
         'Wczoraj byłam w domu.',
         'Жінка, ja → byłam.',
@@ -736,7 +790,7 @@ export const topics = [
       row(
         'Oni ___ w Polsce. (mieszkać)',
         'mieszkali',
-        ['mieszkały', 'mieszkali', 'mieszkał'],
+        ['mieszkały', 'mieszkali', 'mieszkał', 'mieszkałem', 'mieszkaliście'],
         'Вони жили в Польщі. (чоловіки)',
         'Oni mieszkali w Polsce.',
         'Oni → -li.',
@@ -745,7 +799,7 @@ export const topics = [
       row(
         'One ___ listy. (pisać)',
         'pisały',
-        ['pisali', 'pisała', 'pisały'],
+        ['pisali', 'pisała', 'pisały', 'pisałem', 'pisałyście'],
         'Вони писали листи. (жінки)',
         'One pisały listy.',
         'One → -ły.',
@@ -781,7 +835,7 @@ export const topics = [
       row(
         'Jutro ___ czytać. (ja)',
         'będę',
-        ['będzie', 'będą', 'będę'],
+        ['będzie', 'będą', 'będę', 'będziesz', 'będziemy'],
         'Завтра я читатиму.',
         'Jutro będę czytać.',
         'Ja → będę + недоконаний інфінітив.',
@@ -790,7 +844,7 @@ export const topics = [
       row(
         'Jutro ___ list. (ja, napisać)',
         'napiszę',
-        ['będę napisać', 'napiszę', 'napiszesz'],
+        ['będę napisać', 'napiszę', 'napiszesz', 'napisze', 'napiszemy'],
         'Завтра я напишу лист.',
         'Jutro napiszę list.',
         'Napisać доконане; проста форма майбутнього.',
@@ -799,7 +853,7 @@ export const topics = [
       row(
         'My ___ pracować jutro.',
         'będziemy',
-        ['będziecie', 'będziemy', 'będą'],
+        ['będziecie', 'będziemy', 'będą', 'będę', 'będziesz'],
         'Ми працюватимемо завтра.',
         'Będziemy pracować jutro.',
         'My → będziemy.',
@@ -808,7 +862,7 @@ export const topics = [
       row(
         'Oni ___ w domu jutro. (być)',
         'będą',
-        ['będzie', 'będą', 'będziemy'],
+        ['będzie', 'będą', 'będziemy', 'będę', 'będziecie'],
         'Вони будуть удома завтра.',
         'Oni będą w domu jutro.',
         'Oni → będą.',
@@ -843,7 +897,7 @@ export const topics = [
       row(
         'Codziennie ___ książki. (ja, czytać)',
         'czytam',
-        ['przeczytam', 'czytam', 'przeczytałem'],
+        ['przeczytam', 'czytam', 'przeczytałem', 'czytasz', 'czytamy'],
         'Щодня я читаю книжки.',
         'Codziennie czytam książki.',
         'Звичка → недоконаний вид.',
@@ -852,7 +906,7 @@ export const topics = [
       row(
         'Jutro ___ całe zadanie. (ja, zrobić)',
         'zrobię',
-        ['robię', 'zrobię', 'zrobiłem'],
+        ['zrobicie', 'zrobię', 'zrobiłem', 'zrobisz', 'zrobimy'],
         'Завтра я зроблю все завдання.',
         'Jutro zrobię całe zadanie.',
         'Майбутній завершений результат → zrobię.',
@@ -860,7 +914,7 @@ export const topics = [
       row(
         'Wczoraj ___ cały list. (ja, mężczyzna, napisać)',
         'napisałem',
-        ['napiszę', 'pisać', 'napisałem'],
+        ['napiszę', 'pisać', 'napisałem', 'napisałeś', 'napisaliśmy'],
         'Учора я написав усього листа.',
         'Wczoraj napisałem cały list.',
         'Завершений результат у минулому → napisałem.',
@@ -868,7 +922,7 @@ export const topics = [
       row(
         'Wczoraj ___ chleb. (ja, kobieta, kupić)',
         'kupiłam',
-        ['kupuję', 'kupiłam', 'kupiłem'],
+        ['kupuję', 'kupiłam', 'kupiłem', 'kupiłaś', 'kupiłyśmy'],
         'Учора я купила хліб.',
         'Wczoraj kupiłam chleb.',
         'Доконаний минулий час, жіноча форма → kupiłam.',
@@ -902,7 +956,7 @@ export const topics = [
       row(
         '___ masz czas? (питання так/ні)',
         'Czy',
-        ['Czy', 'Co', 'Kto'],
+        ['Czy', 'Co', 'Kto', 'Komu', 'Czego'],
         'Чи маєш час?',
         'Czy masz czas?',
         'Czy починає загальне запитання.',
@@ -910,7 +964,7 @@ export const topics = [
       row(
         'Nic ___ wiem.',
         'nie',
-        ['nie', 'czy', 'jest'],
+        ['nie', 'czy', 'jest', 'nigdy', 'ani'],
         'Я нічого не знаю.',
         'Nic nie wiem.',
         'Подвійне заперечення: nic nie.',
@@ -918,7 +972,7 @@ export const topics = [
       row(
         'Nie mam ___. (czas)',
         'czasu',
-        ['czas', 'czasem', 'czasu'],
+        ['czas', 'czasem', 'czasu', 'czasowi', 'czasie'],
         'Я не маю часу.',
         'Nie mam czasu.',
         'Заперечений прямий додаток → родовий.',
@@ -926,7 +980,7 @@ export const topics = [
       row(
         '___ mieszkasz? (де)',
         'Gdzie',
-        ['Dokąd', 'Gdzie', 'Kiedy'],
+        ['Dokąd', 'Gdzie', 'Kiedy', 'Kogo', 'Czego'],
         'Де ти живеш?',
         'Gdzie mieszkasz?',
         'Gdzie запитує про місце, dokąd — про напрямок.',
@@ -960,7 +1014,7 @@ export const topics = [
       row(
         'Wracam ___ Polski. (звідки)',
         'z',
-        ['do', 'z', 'w'],
+        ['do', 'z', 'w', 'na', 'przy'],
         'Я повертаюся з Польщі.',
         'Wracam z Polski.',
         'Звідки? Z + родовий.',
@@ -968,7 +1022,7 @@ export const topics = [
       row(
         'Idę ___ koncert. (куди)',
         'na',
-        ['w', 'do', 'na'],
+        ['w', 'do', 'na', 'od', 'przy'],
         'Я йду на концерт.',
         'Idę na koncert.',
         'Na + знахідний для напрямку.',
@@ -976,7 +1030,7 @@ export const topics = [
       row(
         'Jestem ___ domu. (де)',
         'w',
-        ['do', 'w', 'z'],
+        ['do', 'w', 'z', 'przez', 'między'],
         'Я вдома.',
         'Jestem w domu.',
         'W + місцевий означає місце.',
@@ -984,7 +1038,7 @@ export const topics = [
       row(
         'Rozmawiam ___ bratem. (з ким)',
         'z',
-        ['do', 'z', 'o'],
+        ['do', 'z', 'o', 'bez', 'dla'],
         'Я розмовляю з братом.',
         'Rozmawiam z bratem.',
         'Разом із ким? Z + орудний.',
@@ -997,6 +1051,7 @@ export const grammarExercises = topics.flatMap((t) =>
   t.drills.flatMap((d, index) => [
     {
       id: `${t.id}-${index}-choice`,
+      familyId: `${t.id}-${index}`,
       topic: t.id,
       level: 'choice',
       prompt: d.prompt,
@@ -1006,6 +1061,7 @@ export const grammarExercises = topics.flatMap((t) =>
     },
     {
       id: `${t.id}-${index}-write`,
+      familyId: `${t.id}-${index}`,
       topic: t.id,
       level: 'write',
       prompt: d.prompt,
@@ -1014,6 +1070,7 @@ export const grammarExercises = topics.flatMap((t) =>
     },
     {
       id: `${t.id}-${index}-sentence`,
+      familyId: `${t.id}-${index}`,
       topic: t.id,
       level: 'sentence',
       prompt: d.ua,
@@ -1227,6 +1284,7 @@ const identificationRows = [
 grammarExercises.push(
   ...identificationRows.map(([prompt, targetWord, answer, explanation], index) => ({
     id: `case-overview-identify-${index}`,
+    familyId: `case-overview-identify-${index}`,
     topic: 'case-overview',
     level: 'identify',
     prompt,

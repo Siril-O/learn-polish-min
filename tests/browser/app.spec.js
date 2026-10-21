@@ -1,5 +1,5 @@
 import { test, expect } from '@playwright/test';
-import { grammarExercises } from '../../src/grammar.js';
+import { grammarExercises } from '../../src/content/index.js';
 
 test.beforeEach(async ({ page }) => {
   await page.addInitScript(() => localStorage.setItem('polski-praktyka:language', 'uk'));
@@ -95,16 +95,17 @@ test('vocabulary can be saved, persisted, searched, and used as flashcards', asy
 
 test('Karta sections and date practice work', async ({ page }) => {
   await page.goto('/#karta');
+  await page.getByLabel('Набір дат', { exact: true }).selectOption('chronology');
   await page.getByLabel('Знайти історичну подію').fill('1999');
   await expect(page.getByRole('heading', { name: 'Polska w NATO' })).toBeVisible();
-  await page.getByText('Український переклад', { exact: true }).click();
-  await expect(page.getByText('12 березня 1999 року Польща вступила до НАТО.')).toBeVisible();
+  await page.getByText('Переклад оригіналу українською', { exact: true }).click();
+  await expect(page.locator('.history-item')).toContainText('1998');
   await page.getByRole('button', { name: 'Співбесіда', exact: true }).click();
   await expect(page.getByRole('heading', { name: 'Proszę opowiedzieć o sobie.' })).toBeVisible();
   await page.getByRole('button', { name: 'Культура і традиції' }).click();
   await page.getByRole('button', { name: 'Перевірити знання' }).click();
   await page.getByRole('button', { name: 'Почати сесію' }).click();
-  await expect(page.getByRole('radio')).toHaveCount(3);
+  await expect(page.getByRole('radio')).toHaveCount(5);
 });
 
 test('backup round trip and invalid file do not lose data', async ({ page }) => {
@@ -153,7 +154,7 @@ test('storage denial and corruption leave app usable', async ({ page }) => {
   await expect(page.getByRole('status')).toBeVisible();
   await page.getByRole('button', { name: 'Практикувати тему' }).click();
   await page.getByRole('button', { name: 'Почати сесію' }).click();
-  await expect(page.getByRole('radio')).toHaveCount(3);
+  await expect(page.getByRole('radio')).toHaveCount(5);
 });
 
 test('production assets and hash navigation work in a GitHub Pages subdirectory', async ({
@@ -189,7 +190,7 @@ test('correct sentence variants complete a session without mistakes', async ({ p
   await page.getByLabel('Складність').selectOption('sentence');
   await page.getByLabel('Завдань у сесії').selectOption('5');
   await page.getByRole('button', { name: 'Почати сесію' }).click();
-  for (let index = 0; index < 4; index++) {
+  for (let index = 0; index < 5; index++) {
     const prompt = await page.locator('.question').innerText();
     const item = grammarExercises.find(
       (q) => q.topic === 'byc' && q.level === 'sentence' && q.prompt === prompt,
@@ -201,11 +202,11 @@ test('correct sentence variants complete a session without mistakes', async ({ p
     await page.getByRole('button', { name: 'Перевірити', exact: true }).click();
     await expect(page.getByRole('status')).toContainText('Правильно');
     await page
-      .getByRole('button', { name: index === 3 ? 'Результат' : 'Далі', exact: true })
+      .getByRole('button', { name: index === 4 ? 'Результат' : 'Далі', exact: true })
       .click();
   }
   await expect(page.getByText('Усі відповіді правильні.')).toBeVisible();
-  await expect(page.locator('.result-score')).toHaveText('4 / 4');
+  await expect(page.locator('.result-score')).toHaveText('5 / 5');
   const state = await page.evaluate(() => JSON.parse(localStorage.getItem('polski-praktyka:v1')));
   expect(state.mistakes).toEqual([]);
 });

@@ -29,13 +29,24 @@ npm run test:e2e
   covering diacritics, soft consonants, and easily confused letter groups.
 
 - Grammar reference with examples, declension tables, and linked exercises.
+- At least 50 distinct contexts per case in choice, written, and sentence modes,
+  plus separate case-identification practice across all seven cases.
+- Thirty distinct contexts per foundational grammar topic, each available as
+  multiple choice, written completion, and sentence translation (90 exercises per topic).
+- Thirty attributed Wikibooks examples adapted into 90 exercises under CC BY-SA 4.0;
+  see [content attribution](docs/content-attribution.md).
 - Sourced case guides with noun/adjective questions, common constructions, and
   contextual analysis of 21 additional sentences.
 - Searchable tables for 20 common verbs across present, past, and future forms,
   with gender variants, aspect notes, case government, and 720 targeted exercises.
 - Multiple-choice, fill-in-the-blank, and sentence translation practice.
+- At least 20 distinct questions in every available topic/answer-mode pool,
+  including each history subsection; regression tests enforce these minimums.
 - First-attempt feedback, explanations, and mistake review.
+- Varied sessions prioritize unseen contexts and store answered exercise IDs locally.
 - History, dates, culture, and interview practice for Karta Polaka preparation.
+- All 53 source chronology paragraphs plus dated material from biographies,
+  city descriptions, and holidays, with full original Ukrainian translations.
 - Searchable vocabulary, saved words, and bidirectional flashcards.
 - Local browser storage, validated JSON backup import, and export.
 
@@ -63,6 +74,9 @@ Learning state is stored in `localStorage` under `polski-praktyka:v1`. It is sco
 to the browser and website origin and has no application-defined expiration.
 Clearing site data removes it. Export/import transfers a backup between devices.
 There is no backend, account, automatic synchronization, or analytics.
+Answered exercise IDs are retained in recency order. Correct and incorrect answers
+both count as attempted; mistakes remain a separate review list. Backup files include
+this history, and older backups remain supported.
 
 ## GitHub Pages
 

@@ -107,7 +107,23 @@ be unambiguous. Written answers normalize NFC, case, whitespace, and final punct
 Polish diacritics are significant. Sentence alternatives must be listed explicitly.
 Do not claim unrestricted translation grading. Explanation is shown after submission.
 
+Foundational practice rows in `src/content/basic-*.js` provide a stable slug, a Polish
+gap prompt, five options with the correct answer first, the completed Polish sentence,
+its Ukrainian translation, bilingual explanations, and optional accepted Polish sentences.
+`basic-practice.js` creates three exercise formats with one shared `familyId`. Each of
+the nine foundational topics has 30 distinct contexts, not 30 copies of one format.
+
 `allExercises` concatenates grammar, history, culture, and vocabulary exercises.
+Every available topic/level pool must contain at least 20 distinct context families
+and prompts. The same minimum applies to each history-category/level pool. Do not
+inflate a pool by counting alternate answer formats as different contexts.
+For all seven individual case topics, the stronger minimum is 50 distinct contexts
+in each of the choice, written, and sentence modes. `cases-expansion.js` consumes
+explicit bilingual rows from `cases-expansion-*.js`, with stable context families
+shared across formats. Regression tests check unique prompts and fifty-item sessions.
+Additional history practice can target distinct subevents from an existing source
+passage without creating or modifying a chronology record; `sourceEntryId` retains
+the link to that passage. Preserve the source text and its dates.
 Grammar topics default to choice, write, and sentence coverage. A topic can declare
 `exerciseLevels` explicitly; the case overview uses `['identify']`. Identification
 highlights `targetWord` in a complete Polish sentence and asks for its grammatical case.
@@ -140,6 +156,12 @@ type HistoryEntry = {
   uk: string;
   source: string; // Verified https URL supporting the teaching text.
   original: string; // Supplied original text, if available; may contain errors.
+  originalUk?: string; // Required when original is nonempty; faithful original translation.
+  originalYear?: string;
+  originalKey?: string;
+  category?: 'chronology' | 'history' | 'people' | 'places' | 'holidays';
+  sourcePages?: number[];
+  sourceDocument?: boolean; // Display PDF provenance instead of an unrelated external link.
   note: string; // Explain material corrections to the original.
   date: string; // Optional full date; empty string if only a year is taught.
 };
@@ -184,6 +206,7 @@ type SavedState = {
   saved: string[]; // Word IDs.
   known: string[]; // Word IDs.
   mistakes: string[]; // Exercise IDs.
+  completed: string[]; // Answered exercise IDs, oldest to most recent; correct and incorrect.
 };
 ```
 
@@ -192,6 +215,14 @@ Storage failures must not prevent practice. Invalid imports must leave state unc
 Import replaces learning data without unexpectedly navigating away from its status.
 Completed session scoring uses the submitted first attempt only. A correct review
 removes its exercise ID from mistakes. Incorrect cards must remain available to review.
+
+Older version-1 backups without `completed` migrate to an empty exercise history.
+Submission records an exercise ID once and moves it to the most-recent position.
+The optional `familyId` on each exercise groups formats of the same learning context.
+Ordinary sessions prefer unseen families, balance topics (or verbs within a verb
+topic), and use least-recently attempted contexts for review. A session uses only
+one variant of a context. Explicit mistake review deliberately bypasses this
+freshness preference. No exercise is marked completed merely by displaying it.
 
 ## Validation
 

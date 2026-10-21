@@ -651,6 +651,7 @@ main:focus {
 }
 .toolbar {
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
   gap: 15px;
@@ -682,6 +683,11 @@ main:focus {
   font-weight: 400;
   margin-top: 3px;
   color: #79837d;
+}
+.history-year.is-long {
+  font-size: 15px;
+  overflow-wrap: anywhere;
+  line-height: 1.5;
 }
 .history-item h2 {
   font-size: 18px;
@@ -906,6 +912,13 @@ main:focus {
 }
 .skip-link:focus {
   top: 10px;
+}
+.skip-link:not(:focus) {
+  clip-path: inset(50%);
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  overflow: hidden;
 }
 @media (min-width: 1550px) {
   main {

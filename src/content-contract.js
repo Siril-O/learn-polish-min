@@ -91,6 +91,7 @@ export function validateContent(bundle) {
       !['original', 'note', 'date'].every((k) => typeof entry[k] === 'string')
     )
       fail('invalid history entry');
+    if (entry.original && !text(entry.originalUk)) fail('missing original history translation');
   }
   for (const entry of bundle.interview)
     if (!['category', 'q', 'uk', 'answer', 'tip'].every((k) => text(entry[k])))
@@ -135,6 +136,17 @@ export function validateContent(bundle) {
       )
         fail('invalid exercise');
       if (q.hint !== undefined && !text(q.hint)) fail('invalid hint');
+      if (q.attribution !== undefined) {
+        const attribution = q.attribution;
+        if (
+          !attribution ||
+          !['title', 'authors', 'license'].every((key) => text(attribution[key])) ||
+          !['url', 'authorsUrl', 'licenseUrl'].every((key) => https(attribution[key]))
+        )
+          fail('invalid exercise attribution');
+      }
+      if (q.familyId !== undefined && (!text(q.familyId) || q.familyId.length > 160))
+        fail('invalid exercise family');
       if (q.topic === 'vocabulary' && !wordIds.has(q.wordId)) fail('invalid word reference');
       if (q.wordId !== undefined && !wordIds.has(q.wordId)) fail('unknown word reference');
       if (

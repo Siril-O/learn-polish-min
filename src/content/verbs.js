@@ -732,7 +732,7 @@ const practiceRows = verbs.flatMap((item, verbIndex) =>
         ...(gender ? { gender } : {}),
         answer,
         writtenAnswers: futureAnswers,
-        options: [answer, ...forms.filter((form) => form !== answer).slice(0, 2)],
+        options: [...new Set([answer, ...forms, ...item.present, ...item.future])].slice(0, 5),
         prompt: {
           pl: `Podaj formę: ${item.infinitive}; ${tenseLabels[tense].pl}; ${label.pl}.${suffix.pl}`,
           uk: `Подай форму: ${item.infinitive}; ${tenseLabels[tense].uk}; ${label.uk}.${suffix.uk}`,
@@ -749,6 +749,7 @@ const practiceRows = verbs.flatMap((item, verbIndex) =>
 export const verbExercises = practiceRows.flatMap((row) =>
   ['choice', 'write'].map((level) => ({
     id: `${row.id}-${level}`,
+    familyId: row.id,
     topic: 'verb-tables',
     verbId: row.verbId,
     tense: row.tense,

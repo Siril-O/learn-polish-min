@@ -31,6 +31,24 @@ export function useLanguage() {
 const polish = {
   'Таблиці дієслів': 'Tabele czasowników',
   'Літери та схожі звуки': 'Litery i podobne głoski',
+  'Спрощений текст · повний зміст': 'Prostszy tekst · pełna treść',
+  'Дата в документі:': 'Data w dokumencie:',
+  'Набір дат': 'Zestaw dat',
+  Дата: 'Data',
+  'Виконані вправи': 'Wykonane ćwiczenia',
+  'У сесії:': 'W sesji:',
+  'Усі матеріали': 'Wszystkie materiały',
+  'Основна хронологія': 'Główna chronologia',
+  'Додаткові історичні дати': 'Dodatkowe daty historyczne',
+  'Люди та культура': 'Ludzie i kultura',
+  'Міста й пам’ятки': 'Miasta i zabytki',
+  'Свята й традиції': 'Święta i tradycje',
+  'Документ · стор.': 'Dokument · s.',
+  'Сторінки матеріалів': 'Strony materiałów',
+  'Попередня сторінка': 'Poprzednia strona',
+  'Наступна сторінка': 'Następna strona',
+  записів: 'wpisów',
+  'Переклад оригіналу українською': 'Tłumaczenie oryginału na ukraiński',
   'Усі дієслова': 'Wszystkie czasowniki',
   'Питання та вживання': 'Pytania i użycie',
   Питання: 'Pytania',
@@ -191,8 +209,8 @@ const polish = {
     'Nie udało się zaimportować kopii. Sprawdź format JSON, wersję i rozmiar pliku (do 2 MB).',
   'Твої навчальні дані та резервні копії.': 'Twoje dane nauki i kopie zapasowe.',
   'Збереження у браузері': 'Zapis w przeglądarce',
-  'Зберігаються остання тема, збережені й вивчені слова та помилки. Дані залишаються в цьому браузері й не надсилаються на сервер. Видалення даних сайту також видалить збереження.':
-    'Zapisywane są ostatni temat, zapisane i opanowane słowa oraz błędy. Dane pozostają w tej przeglądarce i nie są wysyłane na serwer. Usunięcie danych witryny usunie również zapis.',
+  'Зберігаються остання тема, збережені й вивчені слова, помилки та історія виконаних вправ. Дані залишаються в цьому браузері й не надсилаються на сервер. Видалення даних сайту також видалить збереження.':
+    'Zapisywane są ostatni temat, zapisane i opanowane słowa, błędy oraz historia wykonanych ćwiczeń. Dane pozostają w tej przeglądarce i nie są wysyłane na serwer. Usunięcie danych witryny usunie również zapis.',
   'Вивчені слова': 'Opanowane słowa',
   Помилки: 'Błędy',
   'Експорт копії': 'Eksport kopii',
@@ -207,8 +225,10 @@ const polish = {
   Скасувати: 'Anuluj',
   'Очистити помилки': 'Wyczyść błędy',
   'Джерела навчальних матеріалів': 'Źródła materiałów',
-  'Історичні події мають окремі посилання на джерела. Приклади та вправи створені для цього застосунку. Приклади співбесіди є тренувальними, а не офіційним переліком питань.':
-    'Wydarzenia historyczne mają osobne odnośniki do źródeł. Przykłady i ćwiczenia opracowano dla tej aplikacji. Pytania do rozmowy służą do ćwiczeń i nie są oficjalną listą.',
+  'Адаптовано: пропуски, варіанти відповідей і український переклад.':
+    'Adaptacja: luki, warianty odpowiedzi i tłumaczenie ukraińskie.',
+  'Історичні події мають окремі посилання на джерела. Адаптовані вправи з Wikibooks містять посилання на авторів і ліцензію CC BY-SA 4.0. Приклади співбесіди є тренувальними, а не офіційним переліком питань.':
+    'Wydarzenia historyczne mają osobne odnośniki do źródeł. Ćwiczenia adaptowane z Wikibooks zawierają odnośniki do autorów i licencji CC BY-SA 4.0. Pytania do rozmowy służą do ćwiczeń i nie są oficjalną listą.',
   'Браузер не дозволив зберегти дані. Сесія працює; експортуй копію в налаштуваннях.':
     'Przeglądarka nie pozwoliła zapisać danych. Sesja działa; wyeksportuj kopię w ustawieniach.',
   'Не вдалося прочитати збереження. Доступна нова сесія; перевірте резервну копію.':

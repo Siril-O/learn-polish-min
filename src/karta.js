@@ -1,4 +1,5 @@
 import originals from './original-history.json' with { type: 'json' };
+import { completeHistory } from './content/history-complete.js';
 
 const event = (year, title, pl, uk, source, note = '', date = '') => ({
   id: `history-${year}`,
@@ -11,7 +12,7 @@ const event = (year, title, pl, uk, source, note = '', date = '') => ({
   date,
   original: originals[year] || (year === '1999' ? originals['1998'] : ''),
 });
-export const history = [
+const previousHistory = [
   event(
     '966',
     'Chrzest Polski',
@@ -122,6 +123,8 @@ export const history = [
   ),
 ];
 
+export const history = completeHistory(previousHistory);
+
 export const interview = [
   {
     id: 'intro',
@@ -231,60 +234,73 @@ export const cultureQuestions = [
     'flaga',
     'Jakie kolory ma flaga Polski?',
     'biały i czerwony',
-    ['biały i czerwony', 'niebieski i żółty', 'biały i zielony'],
+    [
+      'biały i czerwony',
+      'niebieski i żółty',
+      'biały i zielony',
+      'czerwony i czarny',
+      'niebieski i biały',
+    ],
     'Польський прапор біло-червоний.',
   ],
   [
     'godlo',
     'Co przedstawia godło Polski?',
     'białego orła',
-    ['białego orła', 'złotego lwa', 'białego bociana'],
+    ['białego orła', 'złotego lwa', 'białego bociana', 'czarnego orła', 'srebrnego sokoła'],
     'Герб зображує білого орла в золотій короні на червоному тлі.',
   ],
   [
     'hymn',
     'Jak nazywa się hymn Polski?',
     'Mazurek Dąbrowskiego',
-    ['Mazurek Dąbrowskiego', 'Rota', 'Bogurodzica'],
+    ['Mazurek Dąbrowskiego', 'Rota', 'Bogurodzica', 'Boże, coś Polskę', 'Warszawianka'],
     'Державний гімн — Mazurek Dąbrowskiego.',
   ],
   [
     'wigilia',
     'Kiedy jest Wigilia?',
     '24 grudnia',
-    ['24 grudnia', '25 grudnia', '6 stycznia'],
+    ['24 grudnia', '25 grudnia', '6 stycznia', '26 grudnia', '31 grudnia'],
     'Wigilia передує Різдву й припадає на 24 грудня.',
   ],
   [
     'stolica',
     'Jaka jest stolica Polski?',
     'Warszawa',
-    ['Warszawa', 'Kraków', 'Gdańsk'],
+    ['Warszawa', 'Kraków', 'Gdańsk', 'Poznań', 'Gniezno'],
     'Сучасна столиця Польщі — Варшава.',
   ],
   [
     'niepodleglosc',
     'Kiedy jest Narodowe Święto Niepodległości?',
     '11 listopada',
-    ['11 listopada', '3 maja', '1 sierpnia'],
+    ['11 listopada', '3 maja', '1 sierpnia', '15 sierpnia', '1 września'],
     'Свято незалежності відзначають 11 листопада.',
   ],
   [
     'konstytucja',
     'Kiedy obchodzimy święto Konstytucji 3 maja?',
     '3 maja',
-    ['3 maja', '2 maja', '1 maja'],
+    ['3 maja', '2 maja', '1 maja', '11 listopada', '15 sierpnia'],
     'Назва свята прямо вказує на 3 травня.',
   ],
   [
     'pisanki',
     'Co to są pisanki?',
     'ozdobione jajka',
-    ['ozdobione jajka', 'potrawy wigilijne', 'pieśni świąteczne'],
+    [
+      'ozdobione jajka',
+      'potrawy wigilijne',
+      'pieśni świąteczne',
+      'palmy wielkanocne',
+      'świąteczne wypieki',
+    ],
     'Pisanki — розписані великодні яйця.',
   ],
 ].map(([id, prompt, answer, options, explanation]) => ({
   id: `culture-${id}`,
+  familyId: `culture-${id}`,
   topic: 'culture',
   level: 'choice',
   prompt,
@@ -293,39 +309,53 @@ export const cultureQuestions = [
   explanation,
 }));
 
+function historyChoices(item, index, field) {
+  const choices = [item[field]];
+  for (let offset = 1; offset < history.length && choices.length < 5; offset++) {
+    const candidate = history[(index + offset) % history.length];
+    if (candidate.year !== item.year && !choices.includes(candidate[field]))
+      choices.push(candidate[field]);
+  }
+  return choices;
+}
+
+function historyWrittenAnswers(year) {
+  const variants = [year, year.replace(/[–—]/gu, '-'), year.replace(/\s*[-–—]\s*/gu, '-')];
+  if (year === 'Ok. 1550') variants.push('1550', 'około 1550', 'ok.1550', 'ok 1550');
+  return [...new Set(variants)];
+}
+
 export const historyExercises = history.flatMap((item, index) => [
   {
     id: `${item.id}-year`,
+    familyId: item.id,
     topic: 'history',
+    historyCategory: item.category,
     level: 'choice',
-    prompt: `W którym roku: ${item.title.toLowerCase()}?`,
+    prompt: `Jaka data pasuje do tematu: ${item.title}?`,
     answers: [item.year],
-    options: [
-      item.year,
-      history[(index + 3) % history.length].year,
-      history[(index + 7) % history.length].year,
-    ],
+    options: historyChoices(item, index, 'year'),
     explanation: `${item.pl} ${item.uk}`,
   },
   {
     id: `${item.id}-write`,
+    familyId: item.id,
     topic: 'history',
+    historyCategory: item.category,
     level: 'write',
-    prompt: `Впиши рік: ${item.title}`,
-    answers: [item.year],
+    prompt: `Впиши дату: ${item.title}`,
+    answers: historyWrittenAnswers(item.year),
     explanation: `${item.pl} ${item.uk}`,
   },
   {
     id: `${item.id}-event`,
+    familyId: item.id,
     topic: 'history',
+    historyCategory: item.category,
     level: 'event',
-    prompt: `Co wydarzyło się w ${item.year} roku?`,
+    prompt: `Który temat dokument opisuje przy dacie „${item.year}”?`,
     answers: [item.title],
-    options: [
-      item.title,
-      history[(index + 2) % history.length].title,
-      history[(index + 5) % history.length].title,
-    ],
+    options: historyChoices(item, index, 'title'),
     explanation: item.uk,
   },
 ]);

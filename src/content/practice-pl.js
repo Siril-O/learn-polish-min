@@ -172,7 +172,7 @@ for (const entry of history) {
   for (const suffix of ['year', 'write', 'event']) {
     polishExercises[`${entry.id}-${suffix}`] = {
       explanation: entry.pl,
-      ...(suffix === 'write' ? { prompt: `Wpisz rok: ${entry.title}` } : {}),
+      ...(suffix === 'write' ? { prompt: `Wpisz datę: ${entry.title}` } : {}),
     };
   }
 }
@@ -263,9 +263,9 @@ const historyNotes = {
 export const historyTranslations = {
   pl: Object.fromEntries(
     history.map((entry) => {
-      if (entry.note && !historyNotes[entry.id])
+      if (entry.note && entry.notePl === undefined && !historyNotes[entry.id])
         throw new Error(`Missing Polish history note for ${entry.id}`);
-      return [entry.id, { note: historyNotes[entry.id] || '' }];
+      return [entry.id, { note: entry.notePl ?? historyNotes[entry.id] ?? '' }];
     }),
   ),
 };
