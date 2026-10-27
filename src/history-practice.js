@@ -37,13 +37,23 @@ export function validHistoryRange(from, to) {
 }
 
 export function historyPracticeYears(records, exercises = []) {
-  const dates = [
-    ...records.map((record) => record.year),
-    ...exercises.map((exercise) => exercise.historyDate).filter(Boolean),
-  ];
-  return [...new Set(dates.flatMap((label) => historyYearRanges(label).flat()))].sort(
-    (a, b) => a - b,
-  );
+  const descriptions = new Map();
+  const recordsById = new Map(records.map((record) => [record.id, record]));
+  const addDate = (date, title) => {
+    for (const year of historyYearRanges(date).flat()) {
+      if (!descriptions.has(year)) descriptions.set(year, title);
+    }
+  };
+  for (const record of records) addDate(record.year, record.title);
+  for (const exercise of exercises) {
+    if (exercise.historyDate) {
+      const record = recordsById.get(exercise.sourceEntryId || exercise.familyId);
+      addDate(exercise.historyDate, record?.title || '');
+    }
+  }
+  return [...descriptions]
+    .sort(([a], [b]) => a - b)
+    .map(([year, description]) => ({ year, description }));
 }
 
 export function matchesHistoryPractice(exercise, records, type, from = '', to = '') {

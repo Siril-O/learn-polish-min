@@ -2,6 +2,27 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { historyExercises, exerciseTranslations } from '../src/content/index.js';
 import { history } from '../src/karta.js';
+
+test('date practice asks direct bilingual questions in both answer formats', () => {
+  const questions = historyExercises.filter(
+    (item) => item.historyTestType !== 'context' && ['choice', 'write'].includes(item.level),
+  );
+  assert.equal(questions.length, 304);
+  for (const question of questions) {
+    const polish = exerciseTranslations.pl[question.id].prompt;
+    assert.ok(polish?.includes('?'), `${question.id}: missing Polish question`);
+    assert.ok(question.prompt.includes('?'), `${question.id}: missing Ukrainian question`);
+    assert.doesNotMatch(polish, /Jaka data pasuje|Wpisz datę:|Który temat/iu);
+  }
+  for (const suffix of ['year', 'write']) {
+    const id = `history-1226-${suffix}`;
+    assert.equal(
+      exerciseTranslations.pl[id].prompt,
+      'Kiedy Konrad Mazowiecki sprowadził Krzyżaków do Polski? Podaj rok.',
+    );
+    assert.equal(historyExercises.find((item) => item.id === id).answers[0], '1226');
+  }
+});
 const historyContextExercises = historyExercises.filter(
   (item) => item.historyTestType === 'context',
 );

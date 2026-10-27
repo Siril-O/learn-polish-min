@@ -1,4 +1,5 @@
 import { history } from '../karta.js';
+import { historyDateExtraPrompts } from './history-date-extra-prompts.js';
 
 // Dates and evidence follow the supplied document, including its original chronology.
 const contexts = [
@@ -412,14 +413,15 @@ export const extraHistoryExercises = entries.flatMap((item) => {
     originalEvidence: item.evidence,
     explanation: item.uk,
   };
-  const datePrompt = `Jaka data pasuje do wydarzenia: ${item.title}?`;
+  const datePrompt = historyDateExtraPrompts[item.slug];
+  if (!datePrompt?.pl || !datePrompt?.uk) throw new Error(`Missing date question: ${item.slug}`);
   const eventPrompt = `Które wydarzenie z części „${item.sourceTitle}” pasuje do daty „${item.date}”?`;
   const exercises = [
     {
       ...shared,
       id: `${familyId}-year`,
       level: 'choice',
-      prompt: datePrompt,
+      prompt: datePrompt.uk,
       answers: [item.date],
       options: choicesFor(item, 'date'),
     },
@@ -427,7 +429,7 @@ export const extraHistoryExercises = entries.flatMap((item) => {
       ...shared,
       id: `${familyId}-write`,
       level: 'write',
-      prompt: `Впиши дату: ${item.titleUk}`,
+      prompt: datePrompt.uk,
       answers: [...new Set([item.date, item.date.replace(/[–—]/gu, '-')])],
     },
     {
@@ -441,7 +443,7 @@ export const extraHistoryExercises = entries.flatMap((item) => {
   ];
   for (const exercise of exercises) {
     extraHistoryTranslations.pl[exercise.id] = {
-      prompt: exercise.level === 'write' ? `Wpisz datę: ${item.title}` : exercise.prompt,
+      prompt: exercise.level === 'event' ? exercise.prompt : datePrompt.pl,
       explanation: item.pl,
     };
   }

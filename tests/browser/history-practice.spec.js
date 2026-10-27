@@ -31,10 +31,12 @@ test('history practice filters dates with inclusive year boundaries', async ({ p
   await page.goto('/#practice');
   await page.getByLabel('Temat', { exact: true }).selectOption('history');
   await page.locator('#practice-history-group').selectOption('chronology');
-  await page.getByLabel('Rok od', { exact: true }).selectOption('966');
-  await page.getByLabel('Rok do', { exact: true }).selectOption('966');
+  await page.getByLabel('Rok od', { exact: true }).selectOption('1226');
+  await page.getByLabel('Rok do', { exact: true }).selectOption('1226');
   await page.getByRole('button', { name: 'Rozpocznij sesję', exact: true }).click();
-  await expect(page.locator('.question')).toContainText(/Mieszko|chrzest/iu);
+  await expect(page.locator('.question')).toHaveText(
+    'Kiedy Konrad Mazowiecki sprowadził Krzyżaków do Polski? Podaj rok.',
+  );
   await expect(page.getByRole('radio')).toHaveCount(5);
 });
 

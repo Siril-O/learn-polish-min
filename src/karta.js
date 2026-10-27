@@ -1,5 +1,6 @@
 import originals from './original-history.json' with { type: 'json' };
 import { completeHistory } from './content/history-complete.js';
+import { historyDatePrompts } from './content/history-date-prompts.js';
 
 const event = (year, title, pl, uk, source, note = '', date = '') => ({
   id: `history-${year}`,
@@ -332,7 +333,7 @@ export const historyExercises = history.flatMap((item, index) => [
     topic: 'history',
     historyCategory: item.category,
     level: 'choice',
-    prompt: `Jaka data pasuje do tematu: ${item.title}?`,
+    prompt: historyDatePrompts[item.id].uk,
     answers: [item.year],
     options: historyChoices(item, index, 'year'),
     explanation: `${item.pl} ${item.uk}`,
@@ -343,7 +344,7 @@ export const historyExercises = history.flatMap((item, index) => [
     topic: 'history',
     historyCategory: item.category,
     level: 'write',
-    prompt: `Впиши дату: ${item.title}`,
+    prompt: historyDatePrompts[item.id].uk,
     answers: historyWrittenAnswers(item.year),
     explanation: `${item.pl} ${item.uk}`,
   },

@@ -1,5 +1,6 @@
 import { topics, grammarExercises } from '../grammar.js';
 import { history, interview, historyExercises, cultureQuestions, sources } from '../karta.js';
+import { historyDatePrompts } from './history-date-prompts.js';
 import vocabulary from '../vocabulary.json' with { type: 'json' };
 
 const drillExplanations = {
@@ -172,7 +173,7 @@ for (const entry of history) {
   for (const suffix of ['year', 'write', 'event']) {
     polishExercises[`${entry.id}-${suffix}`] = {
       explanation: entry.pl,
-      ...(suffix === 'write' ? { prompt: `Wpisz datę: ${entry.title}` } : {}),
+      ...(suffix !== 'event' ? { prompt: historyDatePrompts[entry.id].pl } : {}),
     };
   }
 }

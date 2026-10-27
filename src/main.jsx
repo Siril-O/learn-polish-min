@@ -401,7 +401,14 @@ function Practice({ initialTopic, initialVerbId, initialHistoryGroup, state, upd
   const [historyTestType, setHistoryTestType] = useState('dates');
   const [historyFrom, setHistoryFrom] = useState('');
   const [historyTo, setHistoryTo] = useState('');
-  const historyYears = useMemo(() => historyPracticeYears(history, content.historyExercises), []);
+  const historyYears = useMemo(
+    () =>
+      historyPracticeYears(
+        history.map((record) => localizeHistory(record, language, content)),
+        content.historyExercises,
+      ),
+    [language],
+  );
   const [level, setLevel] = useState('choice');
   const [count, setCount] = useState('10');
   const [session, setSession] = useState(null);
@@ -557,9 +564,9 @@ function Practice({ initialTopic, initialVerbId, initialHistoryGroup, state, upd
                     onChange={(event) => setHistoryFrom(event.target.value)}
                   >
                     <option value="">{translate('Без обмежень')}</option>
-                    {historyYears.map((year) => (
+                    {historyYears.map(({ year, description }) => (
                       <option key={year} value={year}>
-                        {year}
+                        {year} - {description}
                       </option>
                     ))}
                   </select>
@@ -575,9 +582,9 @@ function Practice({ initialTopic, initialVerbId, initialHistoryGroup, state, upd
                     onChange={(event) => setHistoryTo(event.target.value)}
                   >
                     <option value="">{translate('Без обмежень')}</option>
-                    {historyYears.map((year) => (
+                    {historyYears.map(({ year, description }) => (
                       <option key={year} value={year}>
-                        {year}
+                        {year} - {description}
                       </option>
                     ))}
                   </select>
