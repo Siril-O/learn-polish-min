@@ -408,6 +408,7 @@ export const extraHistoryExercises = entries.flatMap((item) => {
     topic: 'history',
     historyCategory: item.category,
     sourceEntryId: item.sourceEntryId,
+    historyDate: item.date,
     originalEvidence: item.evidence,
     explanation: item.uk,
   };

@@ -25,6 +25,12 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './style.css';
 import Verbs from './Verbs.jsx';
 import { selectSessionExercises } from './session-selection.js';
+import { isMixedCaseSession, withoutCaseHints } from './mixed-case-presentation.js';
+import {
+  matchesHistoryPractice,
+  validHistoryRange,
+  historyPracticeYears,
+} from './history-practice.js';
 import { translate, useLanguage, setLanguage } from './interface-language.js';
 import {
   localizeLesson,
@@ -392,11 +398,20 @@ function Practice({ initialTopic, initialVerbId, initialHistoryGroup, state, upd
   const [topic, setTopic] = useState(initialTopic || 'all');
   const [verbId, setVerbId] = useState(initialVerbId || '');
   const [historyGroup, setHistoryGroup] = useState(initialHistoryGroup || 'all');
+  const [historyTestType, setHistoryTestType] = useState('dates');
+  const [historyFrom, setHistoryFrom] = useState('');
+  const [historyTo, setHistoryTo] = useState('');
+  const historyYears = useMemo(() => historyPracticeYears(history, content.historyExercises), []);
   const [level, setLevel] = useState('choice');
   const [count, setCount] = useState('10');
   const [session, setSession] = useState(null);
   const [rule, setRule] = useState(null);
   const source = allExercises.filter((q) => {
+    if (
+      topic === 'history' &&
+      !matchesHistoryPractice(q, history, historyTestType, historyFrom, historyTo)
+    )
+      return false;
     if (topic === 'mistakes') return state.mistakes.includes(q.id);
     if (topic === 'all') return topics.some((t) => t.id === q.topic);
     if (topic === 'cases') return topics.some((t) => t.id === q.topic && t.group === 'Відмінки');
@@ -513,23 +528,78 @@ function Practice({ initialTopic, initialVerbId, initialHistoryGroup, state, upd
               </div>
             )}
             {topic === 'history' && (
-              <div>
-                <label className="form-label" htmlFor="practice-history-group">
-                  {translate('Набір дат')}
-                </label>
-                <select
-                  id="practice-history-group"
-                  className="form-select"
-                  value={historyGroup}
-                  onChange={(event) => setHistoryGroup(event.target.value)}
-                >
-                  {historyGroups.map(([id, label]) => (
-                    <option key={id} value={id}>
-                      {translate(label)}
-                    </option>
-                  ))}
-                </select>
-              </div>
+              <>
+                <div>
+                  <label className="form-label" htmlFor="practice-history-type">
+                    {translate('Тип тесту')}
+                  </label>
+                  <select
+                    id="practice-history-type"
+                    className="form-select"
+                    value={historyTestType}
+                    onChange={(event) => {
+                      setHistoryTestType(event.target.value);
+                      setLevel('choice');
+                    }}
+                  >
+                    <option value="dates">{translate('Дати')}</option>
+                    <option value="context">{translate('Питання про події')}</option>
+                  </select>
+                </div>
+                <div>
+                  <label className="form-label" htmlFor="practice-history-from">
+                    {translate('Рік від')}
+                  </label>
+                  <select
+                    id="practice-history-from"
+                    className="form-select"
+                    value={historyFrom}
+                    onChange={(event) => setHistoryFrom(event.target.value)}
+                  >
+                    <option value="">{translate('Без обмежень')}</option>
+                    {historyYears.map((year) => (
+                      <option key={year} value={year}>
+                        {year}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+                <div>
+                  <label className="form-label" htmlFor="practice-history-to">
+                    {translate('Рік до')}
+                  </label>
+                  <select
+                    id="practice-history-to"
+                    className="form-select"
+                    value={historyTo}
+                    onChange={(event) => setHistoryTo(event.target.value)}
+                  >
+                    <option value="">{translate('Без обмежень')}</option>
+                    {historyYears.map((year) => (
+                      <option key={year} value={year}>
+                        {year}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+                <div>
+                  <label className="form-label" htmlFor="practice-history-group">
+                    {translate('Набір дат')}
+                  </label>
+                  <select
+                    id="practice-history-group"
+                    className="form-select"
+                    value={historyGroup}
+                    onChange={(event) => setHistoryGroup(event.target.value)}
+                  >
+                    {historyGroups.map(([id, label]) => (
+                      <option key={id} value={id}>
+                        {translate(label)}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              </>
             )}
             <div>
               <label className="form-label" htmlFor="practice-level">
@@ -568,6 +638,11 @@ function Practice({ initialTopic, initialVerbId, initialHistoryGroup, state, upd
               </select>
             </div>
           </div>
+          {topic === 'history' && !validHistoryRange(historyFrom, historyTo) && (
+            <p className="text-danger" role="alert">
+              {translate('Вкажи коректні роки: початок не може бути пізніше кінця.')}
+            </p>
+          )}
           <div className="session-start">
             <span className="text-secondary">
               {translate('Доступно: ')}
@@ -629,6 +704,7 @@ function Practice({ initialTopic, initialVerbId, initialHistoryGroup, state, upd
           item={session.items[session.index]}
           index={session.index}
           total={session.items.length}
+          mixedCases={isMixedCaseSession(session.items, topics)}
           onRule={setRule}
           exit={() => setSession(null)}
           checked={(item, correct) =>
@@ -682,7 +758,7 @@ function Practice({ initialTopic, initialVerbId, initialHistoryGroup, state, upd
     </>
   );
 }
-function Quiz({ item, index, total, checked, next, exit, onRule }) {
+function Quiz({ item, index, total, checked, next, exit, onRule, mixedCases }) {
   const language = useLanguage();
   const displayItem = localizeExercise(item, language, content);
   const [value, setValue] = useState('');
@@ -691,6 +767,9 @@ function Quiz({ item, index, total, checked, next, exit, onRule }) {
   const nextButton = useRef();
   const submitted = useRef(false);
   const topic = topics.find((t) => t.id === item.topic);
+  const hideCase = mixedCases && feedback === null && topic?.group === 'Відмінки';
+  const questionPrompt =
+    mixedCases && feedback === null ? withoutCaseHints(displayItem.prompt) : displayItem.prompt;
   useEffect(() => {
     if (!item.options) input.current?.focus();
   }, [item]);
@@ -743,7 +822,7 @@ function Quiz({ item, index, total, checked, next, exit, onRule }) {
       </div>
       <div className="d-flex flex-wrap gap-2 align-items-center mb-3">
         <span className="badge text-bg-light">
-          {translate(topic?.title) ||
+          {(hideCase ? translate('Змішані вправи') : translate(topic?.title)) ||
             (item.topic === 'history'
               ? translate('Дати й події')
               : item.topic === 'culture'
@@ -762,16 +841,16 @@ function Quiz({ item, index, total, checked, next, exit, onRule }) {
       >
         {item.level === 'identify'
           ? (() => {
-              const offset = displayItem.prompt.indexOf(item.targetWord);
+              const offset = questionPrompt.indexOf(item.targetWord);
               return (
                 <>
-                  {displayItem.prompt.slice(0, offset)}
+                  {questionPrompt.slice(0, offset)}
                   <mark>{item.targetWord}</mark>
-                  {displayItem.prompt.slice(offset + item.targetWord.length)}
+                  {questionPrompt.slice(offset + item.targetWord.length)}
                 </>
               );
             })()
-          : displayItem.prompt}
+          : questionPrompt}
       </h2>
       {item.level === 'identify' && (
         <p className="text-secondary">{translate('У якому відмінку виділене слово?')}</p>
@@ -806,7 +885,9 @@ function Quiz({ item, index, total, checked, next, exit, onRule }) {
         ) : (
           <>
             <label className="form-label small" htmlFor="written-answer">
-              {item.topic === 'history' ? translate('Дата') : translate('Твоя відповідь польською')}
+              {item.topic === 'history' && item.historyTestType !== 'context'
+                ? translate('Дата')
+                : translate('Твоя відповідь польською')}
             </label>
             <input
               ref={input}
@@ -889,7 +970,7 @@ function Quiz({ item, index, total, checked, next, exit, onRule }) {
         </p>
       )}
       <div className="quiz-bottom">
-        {topic && (
+        {topic && !hideCase && (
           <button
             className="btn btn-link p-0"
             onClick={() => onRule(item.verbId ? { ...topic, selectedVerbId: item.verbId } : topic)}

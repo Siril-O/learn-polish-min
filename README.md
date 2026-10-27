@@ -31,6 +31,8 @@ npm run test:e2e
 - Grammar reference with examples, declension tables, and linked exercises.
 - At least 50 distinct contexts per case in choice, written, and sentence modes,
   plus separate case-identification practice across all seven cases.
+- Miejscownik has 100 distinct contexts per mode, including irregular plurals,
+  personal pronouns, adjective agreement, and all five common locative prepositions.
 - Thirty distinct contexts per foundational grammar topic, each available as
   multiple choice, written completion, and sentence translation (90 exercises per topic).
 - Thirty attributed Wikibooks examples adapted into 90 exercises under CC BY-SA 4.0;
@@ -45,6 +47,11 @@ npm run test:e2e
 - First-attempt feedback, explanations, and mistake review.
 - Varied sessions prioritize unseen contexts and store answered exercise IDs locally.
 - History, dates, culture, and interview practice for Karta Polaka preparation.
+- History practice separates date recall from contextual event questions, with optional
+  inclusive start/end year filters. Clearing either year leaves that boundary open;
+  annual holidays without a historical year are excluded when a year filter is active.
+- Every dated history record has at least two distinct contextual questions, each with
+  five-option choice and written-answer formats, Polish/Ukrainian text, and source evidence.
 - All 53 source chronology paragraphs plus dated material from biographies,
   city descriptions, and holidays, with full original Ukrainian translations.
 - Searchable vocabulary, saved words, and bidirectional flashcards.

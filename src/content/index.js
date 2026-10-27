@@ -18,6 +18,11 @@ import { caseCompletionExercises, caseCompletionTranslations } from './case-comp
 import { expandedCaseExercises, expandedCaseTranslations } from './cases-expansion.js';
 import { extraCultureQuestions, extraCultureTranslations } from './culture-extra.js';
 import { extraHistoryExercises, extraHistoryTranslations } from './history-practice-extra.js';
+import { historyContextExercises, historyContextTranslations } from './history-context.js';
+import {
+  expandedHistoryContextExercises,
+  expandedHistoryContextTranslations,
+} from './history-context-expansion.js';
 import {
   declensionExtraEarly,
   declensionExtraEarlyTranslations,
@@ -55,7 +60,12 @@ import {
 
 export const contentVersion = 1;
 export const cultureQuestions = [...baseCultureQuestions, ...extraCultureQuestions];
-export const historyExercises = [...baseHistoryExercises, ...extraHistoryExercises];
+export const historyExercises = [
+  ...baseHistoryExercises,
+  ...extraHistoryExercises,
+  ...historyContextExercises,
+  ...expandedHistoryContextExercises,
+];
 export const topics = [...baseTopics, verbTopic, spellingTopic];
 export const declensionExercises = [
   ...declensionExtraEarly,
@@ -95,6 +105,8 @@ export const exerciseTranslations = {
     ...expandedCaseTranslations.pl,
     ...extraCultureTranslations.pl,
     ...extraHistoryTranslations.pl,
+    ...historyContextTranslations.pl,
+    ...expandedHistoryContextTranslations.pl,
   },
 };
 export {

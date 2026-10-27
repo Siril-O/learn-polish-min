@@ -34,7 +34,7 @@ test('all seven cases offer at least fifty unique contexts in each main answer m
 });
 
 test('new case contexts align gap answers and contain bilingual teaching content', () => {
-  assert.equal(expandedCaseExercises.length, 519);
+  assert.equal(expandedCaseExercises.length, 669);
   for (const [topic, rows] of Object.entries(expandedCaseContexts)) {
     for (const [slug, prompt, options, sentence, ukrainian, rulePl, ruleUk] of rows) {
       const id = `cases-expanded-${topic}-${slug}`;

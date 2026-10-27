@@ -29,6 +29,15 @@ export function useLanguage() {
 }
 
 const polish = {
+  'Без обмежень': 'Bez ograniczeń',
+  'Тип тесту': 'Typ testu',
+  Дати: 'Daty',
+  'Питання про події': 'Pytania o wydarzenia',
+  'Рік від': 'Rok od',
+  'Рік до': 'Rok do',
+  'Вкажи коректні роки: початок не може бути пізніше кінця.':
+    'Podaj poprawne lata: początek nie może być późniejszy niż koniec.',
+  'Змішані вправи': 'Ćwiczenia mieszane',
   'Таблиці дієслів': 'Tabele czasowników',
   'Літери та схожі звуки': 'Litery i podobne głoski',
   'Спрощений текст · повний зміст': 'Prostszy tekst · pełna treść',

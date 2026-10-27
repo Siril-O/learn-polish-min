@@ -2,12 +2,19 @@ import { casesExpansionEarly } from './cases-expansion-early.js';
 import { casesExpansionMiddle } from './cases-expansion-middle.js';
 import { casesExpansionVocative } from './cases-expansion-vocative.js';
 import { casesExpansionGenitive } from './cases-expansion-genitive.js';
+import { miejscownikExtraContexts } from './miejscownik-extra-contexts.js';
+import { miejscownikEverydayContexts } from './miejscownik-everyday-contexts.js';
 
 export const expandedCaseContexts = {
   ...casesExpansionEarly,
   ...casesExpansionMiddle,
   ...casesExpansionVocative,
   ...casesExpansionGenitive,
+  miejscownik: [
+    ...casesExpansionMiddle.miejscownik,
+    ...miejscownikExtraContexts,
+    ...miejscownikEverydayContexts,
+  ],
 };
 export const expandedCaseTranslations = { pl: {} };
 export const expandedCaseExercises = Object.entries(expandedCaseContexts).flatMap(([topic, rows]) =>
