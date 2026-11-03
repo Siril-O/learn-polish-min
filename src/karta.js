@@ -1,6 +1,7 @@
 import originals from './original-history.json' with { type: 'json' };
 import { completeHistory } from './content/history-complete.js';
 import { historyDatePrompts } from './content/history-date-prompts.js';
+import { historyDateChoices } from './content/history-date-options.js';
 
 const event = (year, title, pl, uk, source, note = '', date = '') => ({
   id: `history-${year}`,
@@ -311,6 +312,11 @@ export const cultureQuestions = [
 }));
 
 function historyChoices(item, index, field) {
+  if (field === 'year')
+    return historyDateChoices(
+      item.year,
+      history.map((entry) => entry.year),
+    );
   const choices = [item[field]];
   for (let offset = 1; offset < history.length && choices.length < 5; offset++) {
     const candidate = history[(index + offset) % history.length];

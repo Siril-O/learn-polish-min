@@ -161,11 +161,16 @@ summary:focus-visible {
   background: #fff;
 }
 .brand {
+  color: inherit;
+  text-decoration: none;
   display: flex;
   align-items: center;
   gap: 12px;
   font-size: 19px;
   font-weight: 650;
+}
+.brand:hover {
+  color: inherit;
 }
 .brand > div > span {
   display: block;
@@ -498,6 +503,38 @@ main:focus {
   gap: 20px;
   margin-bottom: 15px;
   font-size: 13px;
+}
+.history-event-help {
+  position: relative;
+  margin-left: auto;
+}
+.history-event-tooltip {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  z-index: 20;
+  width: min(460px, calc(100vw - 76px));
+  max-height: min(440px, 55vh);
+  overflow-y: auto;
+  padding: 16px;
+  border: 1px solid #cbd5ce;
+  border-radius: 6px;
+  background: #fff;
+  color: #26372d;
+  box-shadow: 0 6px 20px #0000001f;
+  font-size: 14px;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+.history-event-tooltip strong {
+  display: block;
+  margin-bottom: 8px;
+}
+.history-event-tooltip p {
+  margin: 0 0 12px;
+}
+.history-event-tooltip p:last-child {
+  margin-bottom: 0;
 }
 .icon-btn {
   width: 36px;

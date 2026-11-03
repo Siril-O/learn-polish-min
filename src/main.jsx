@@ -24,6 +24,8 @@ import {
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './style.css';
 import Verbs from './Verbs.jsx';
+import HistoryEventTooltip from './HistoryEventTooltip.jsx';
+import { historyEventDetails } from './content/history-event-details.js';
 import { selectSessionExercises } from './session-selection.js';
 import { isMixedCaseSession, withoutCaseHints } from './mixed-case-presentation.js';
 import {
@@ -774,6 +776,22 @@ function Quiz({ item, index, total, checked, next, exit, onRule, mixedCases }) {
   const nextButton = useRef();
   const submitted = useRef(false);
   const topic = topics.find((t) => t.id === item.topic);
+  const historyEntry =
+    item.topic === 'history'
+      ? history.find((entry) => entry.id === (item.sourceEntryId || item.familyId))
+      : null;
+  const historyDetails = historyEntry
+    ? historyEventDetails[historyEntry.id]?.[language] || historyEntry[language]
+    : '';
+  const historyParagraphs = historyDetails ? [historyDetails] : [];
+  if (
+    historyEntry &&
+    item.sourceEntryId &&
+    displayItem.explanation &&
+    !historyDetails.includes(displayItem.explanation)
+  ) {
+    historyParagraphs.unshift(displayItem.explanation);
+  }
   const hideCase = mixedCases && feedback === null && topic?.group === 'Відмінки';
   const questionPrompt =
     mixedCases && feedback === null ? withoutCaseHints(displayItem.prompt) : displayItem.prompt;
@@ -837,6 +855,13 @@ function Quiz({ item, index, total, checked, next, exit, onRule, mixedCases }) {
                 : translate('Словник'))}
         </span>
         <span className="small text-secondary">{translate(levels[item.level])}</span>
+        {historyParagraphs.length > 0 && (
+          <HistoryEventTooltip
+            label={translate('Докладніше про подію')}
+            paragraphs={historyParagraphs}
+            language={language}
+          />
+        )}
       </div>
       <h2
         className="question"
@@ -1730,12 +1755,19 @@ function App() {
         {translate('До основного вмісту')}
       </a>
       <header className="app-header">
-        <div className="brand">
+        <a
+          className="brand"
+          href="#grammar"
+          onClick={(event) => {
+            event.preventDefault();
+            navigate('grammar');
+          }}
+        >
           <span className="brand-mark" aria-hidden="true">
             P<span>ą</span>
           </span>
           <div>Polski Praktyka</div>
-        </div>
+        </a>
         <select
           className="form-select language-select"
           aria-label="Language / Język"

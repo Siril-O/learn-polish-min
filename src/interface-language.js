@@ -29,6 +29,7 @@ export function useLanguage() {
 }
 
 const polish = {
+  'Докладніше про подію': 'Więcej o wydarzeniu',
   'Без обмежень': 'Bez ograniczeń',
   'Тип тесту': 'Typ testu',
   Дати: 'Daty',

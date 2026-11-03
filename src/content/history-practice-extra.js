@@ -1,5 +1,6 @@
 import { history } from '../karta.js';
 import { historyDateExtraPrompts } from './history-date-extra-prompts.js';
+import { historyDateChoices } from './history-date-options.js';
 
 // Dates and evidence follow the supplied document, including its original chronology.
 const contexts = [
@@ -379,6 +380,11 @@ const entries = contexts.map(
 );
 
 function choicesFor(item, field) {
+  if (field === 'date')
+    return historyDateChoices(item.date, [
+      ...entries.map((entry) => entry.date),
+      ...history.map((entry) => entry.year),
+    ]);
   const candidates = entries.filter(
     (entry) => entry.category === item.category && entry.date !== item.date,
   );
