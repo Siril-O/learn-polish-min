@@ -2,9 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { ExternalLink, RotateCcw } from 'lucide-react';
 import { useLanguage } from './interface-language.js';
 
-export default function HistoryBackground({ entryId }) {
+export default function HistoryBackground({ entryId, expanded = false }) {
   const language = useLanguage();
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(expanded);
   const [entry, setEntry] = useState(null);
   const [failed, setFailed] = useState(false);
   const [attempt, setAttempt] = useState(0);
@@ -25,15 +25,7 @@ export default function HistoryBackground({ entryId }) {
       active = false;
     };
   }, [open, entryId, attempt]);
-  return (
-    <details
-      className="history-background mt-3"
-      onToggle={(event) => setOpen(event.currentTarget.open)}
-    >
-      <summary>
-        {pl ? 'Kontekst historyczny i powiązania' : 'Історичний контекст і зв’язки'}
-      </summary>
-      {open && (
+  const body = open && (
         <div className="history-background-body mt-3" lang={language}>
           {failed ? (
             <div role="alert">
@@ -65,7 +57,17 @@ export default function HistoryBackground({ entryId }) {
             </>
           )}
         </div>
-      )}
+      );
+  if (expanded) return body;
+  return (
+    <details
+      className="history-background mt-3"
+      onToggle={(event) => setOpen(event.currentTarget.open)}
+    >
+      <summary>
+        {pl ? 'Kontekst historyczny i powiązania' : 'Історичний контекст і зв’язки'}
+      </summary>
+      {body}
     </details>
   );
 }

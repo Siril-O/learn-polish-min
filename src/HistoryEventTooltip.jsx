@@ -1,7 +1,8 @@
 import { useEffect, useId, useRef, useState } from 'react';
 import { Info } from 'lucide-react';
+import HistoryBackground from './HistoryBackground.jsx';
 
-export default function HistoryEventTooltip({ label, paragraphs, language }) {
+export default function HistoryEventTooltip({ label, entryId, language }) {
   const id = useId();
   const root = useRef();
   const [hovered, setHovered] = useState(false);
@@ -56,9 +57,7 @@ export default function HistoryEventTooltip({ label, paragraphs, language }) {
       {visible && (
         <div id={id} role="tooltip" tabIndex={0} className="history-event-tooltip" lang={language}>
           <strong>{label}</strong>
-          {paragraphs.map((paragraph, index) => (
-            <p key={index}>{paragraph}</p>
-          ))}
+          <HistoryBackground key={entryId} entryId={entryId} expanded />
         </div>
       )}
     </div>

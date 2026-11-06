@@ -10,6 +10,7 @@ import {
   ExternalLink,
   GraduationCap,
   ListChecks,
+  Map,
   RotateCcw,
   Search,
   Settings,
@@ -29,7 +30,6 @@ import LearningPlan from './LearningPlan.jsx';
 import { topicLevels } from './learning-plan.js';
 import HistoryEventTooltip from './HistoryEventTooltip.jsx';
 import HistoryBackground from './HistoryBackground.jsx';
-import { historyEventDetails } from './content/history-event-details.js';
 import { selectSessionExercises } from './session-selection.js';
 import { isMixedCaseSession, withoutCaseHints } from './mixed-case-presentation.js';
 import {
@@ -58,7 +58,7 @@ import {
   recordCompleted,
 } from './logic';
 const routes = [
-  ['plan', 'План навчання', ListChecks],
+  ['plan', 'План навчання', Map],
   ['grammar', 'Граматика', BookOpen],
   ['practice', 'Практика', ListChecks],
   ['karta', 'Карта поляка', GraduationCap],
@@ -815,18 +815,6 @@ function Quiz({ item, index, total, checked, next, exit, onRule, mixedCases }) {
     item.topic === 'history'
       ? history.find((entry) => entry.id === (item.sourceEntryId || item.familyId))
       : null;
-  const historyDetails = historyEntry
-    ? historyEventDetails[historyEntry.id]?.[language] || historyEntry[language]
-    : '';
-  const historyParagraphs = historyDetails ? [historyDetails] : [];
-  if (
-    historyEntry &&
-    item.sourceEntryId &&
-    displayItem.explanation &&
-    !historyDetails.includes(displayItem.explanation)
-  ) {
-    historyParagraphs.unshift(displayItem.explanation);
-  }
   const hideCase = mixedCases && feedback === null && topic?.group === 'Відмінки';
   const questionPrompt =
     mixedCases && feedback === null ? withoutCaseHints(displayItem.prompt) : displayItem.prompt;
@@ -890,10 +878,10 @@ function Quiz({ item, index, total, checked, next, exit, onRule, mixedCases }) {
                 : translate('Словник'))}
         </span>
         <span className="small text-secondary">{translate(levels[item.level])}</span>
-        {historyParagraphs.length > 0 && (
+        {historyEntry && (
           <HistoryEventTooltip
             label={translate('Докладніше про подію')}
-            paragraphs={historyParagraphs}
+            entryId={historyEntry.id}
             language={language}
           />
         )}

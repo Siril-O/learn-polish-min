@@ -1,4 +1,5 @@
 import { test, expect } from '@playwright/test';
+import { historyBackground } from '../../src/content/history-background.js';
 
 async function startDatePractice(page) {
   await page.goto('/#practice');
@@ -17,7 +18,7 @@ test('event details open by tap or keyboard, close with Escape, and follow langu
   await expect(page.getByRole('tooltip')).toHaveCount(0);
   await button.click();
   const tooltip = page.getByRole('tooltip');
-  await expect(tooltip).toContainText('Konrad Mazowiecki');
+  await expect(tooltip.locator('.history-background-body > p')).toHaveText(historyBackground['history-1226'].pl);
   await expect(tooltip).toContainText('Prusów');
   const bounds = await tooltip.boundingBox();
   const viewport = page.viewportSize();
@@ -29,7 +30,7 @@ test('event details open by tap or keyboard, close with Escape, and follow langu
   await page.getByLabel('Language / Język').selectOption('uk');
   await page.getByRole('button', { name: 'Докладніше про подію', exact: true }).focus();
   await expect(tooltip).toHaveAttribute('lang', 'uk');
-  await expect(tooltip).toContainText('Конрад Мазовецький');
+  await expect(tooltip.locator('.history-background-body > p')).toHaveText(historyBackground['history-1226'].uk);
   await page.locator('.quiz-top').click();
   await expect(tooltip).toHaveCount(0);
 });
@@ -42,6 +43,6 @@ test('event details open on hover and close when the pointer leaves', async ({
   await startDatePractice(page);
   await page.getByRole('button', { name: 'Więcej o wydarzeniu', exact: true }).hover();
   await expect(page.getByRole('tooltip')).toBeVisible();
-  await page.locator('.question').hover();
+  await page.mouse.move(0, 0);
   await expect(page.getByRole('tooltip')).toHaveCount(0);
 });
