@@ -29,6 +29,8 @@ export function useLanguage() {
 }
 
 const polish = {
+  'План навчання': 'Plan nauki',
+  'Безособові конструкції': 'Konstrukcje bezosobowe',
   'Докладніше про подію': 'Więcej o wydarzeniu',
   'Без обмежень': 'Bez ograniczeń',
   'Тип тесту': 'Typ testu',

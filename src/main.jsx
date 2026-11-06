@@ -24,7 +24,11 @@ import {
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './style.css';
 import Verbs from './Verbs.jsx';
+import AnalyticsConsent from './AnalyticsConsent.jsx';
+import LearningPlan from './LearningPlan.jsx';
+import { topicLevels } from './learning-plan.js';
 import HistoryEventTooltip from './HistoryEventTooltip.jsx';
+import HistoryBackground from './HistoryBackground.jsx';
 import { historyEventDetails } from './content/history-event-details.js';
 import { selectSessionExercises } from './session-selection.js';
 import { isMixedCaseSession, withoutCaseHints } from './mixed-case-presentation.js';
@@ -54,6 +58,7 @@ import {
   recordCompleted,
 } from './logic';
 const routes = [
+  ['plan', 'План навчання', ListChecks],
   ['grammar', 'Граматика', BookOpen],
   ['practice', 'Практика', ListChecks],
   ['karta', 'Карта поляка', GraduationCap],
@@ -183,6 +188,17 @@ function RuleContent({ topic: sourceTopic }) {
         ))}
       </ol>
       <DataTable columns={topic.columns} rows={topic.table} />
+      {topic.sources?.length > 0 && (
+        <ul className="list-inline small mt-2">
+          {topic.sources.map((source) => (
+            <li className="list-inline-item" key={source.url}>
+              <a href={source.url} target="_blank" rel="noreferrer">
+                {source.title}
+              </a>
+            </li>
+          ))}
+        </ul>
+      )}
       <div className="mistake-note">
         <AlertCircle size={18} />
         <div>
@@ -303,8 +319,10 @@ function RuleDialog({ topic, close }) {
 function Grammar({ selected, select, practice }) {
   const language = useLanguage();
   const [search, setSearch] = useState('');
+  const [cefr, setCefr] = useState('all');
   const topic = topics.find((t) => t.id === selected) || topics[0];
   const visible = topics.filter((t) => {
+    if (cefr !== 'all' && !topicLevels[t.id]?.includes(cefr)) return false;
     const localized = localizeLesson(t, language, content);
     return `${t.title} ${translate(t.title)} ${localized.subtitle} ${localized.rules.join(' ')}`
       .toLowerCase()
@@ -322,6 +340,20 @@ function Grammar({ selected, select, practice }) {
       </Heading>
       <div className="grammar-layout">
         <aside className="topic-nav" aria-label={translate('Теми граматики')}>
+          <label className="d-block small mb-2">
+            {language === 'pl' ? 'Poziom CEFR' : 'Рівень CEFR'}
+            <select
+              className="form-select form-select-sm mt-1"
+              value={cefr}
+              aria-label={language === 'pl' ? 'Poziom CEFR' : 'Рівень CEFR'}
+              onChange={(event) => setCefr(event.target.value)}
+            >
+              <option value="all">{language === 'pl' ? 'Wszystkie poziomy' : 'Усі рівні'}</option>
+              {['A1', 'A2', 'B1'].map((value) => (
+                <option key={value}>{value}</option>
+              ))}
+            </select>
+          </label>
           <label className="search-field">
             <Search size={17} />
             <input
@@ -342,10 +374,12 @@ function Grammar({ selected, select, practice }) {
                     <button
                       key={t.id}
                       className={`topic-link ${t.id === topic.id ? 'active' : ''}`}
+                      aria-label={translate(t.title)}
                       aria-current={t.id === topic.id ? 'page' : undefined}
                       onClick={() => select(t.id)}
                     >
                       {translate(t.title)}
+                      <small className="text-secondary">{topicLevels[t.id]?.join(' · ')}</small>
                       <ChevronRight size={15} />
                     </button>
                   ))}
@@ -361,6 +395,7 @@ function Grammar({ selected, select, practice }) {
           <>
             <div className="lesson-header">
               <h2>{translate(topic.title)}</h2>
+              <span className="badge text-bg-light">{topicLevels[topic.id]?.join(' · ')}</span>
               <span className="badge text-bg-light">{translate(topic.group)}</span>
             </div>
             {topic.id === 'verb-tables' ? (
@@ -1199,6 +1234,7 @@ function Karta({ practice }) {
                       </details>
                     </details>
                   )}
+                  <HistoryBackground entryId={h.id} />
                   {!h.sourceDocument && (
                     <a className="source-link" href={h.source} target="_blank" rel="noreferrer">
                       {translate('Джерело ')}
@@ -1804,6 +1840,7 @@ function App() {
           </div>
         </nav>
         <main id="main-content" tabIndex={-1}>
+          <AnalyticsConsent view={view} />
           {warning && view !== 'settings' && (
             <div className="alert alert-warning small" role="status">
               {translate(warning)}
@@ -1821,6 +1858,15 @@ function App() {
               practice={practice}
             />
           )}{' '}
+          {view === 'plan' && (
+            <LearningPlan
+              openTopic={(topic) => {
+                update((s) => ({ ...s, topic }));
+                navigate('grammar');
+              }}
+              practice={practice}
+            />
+          )}
           {view === 'practice' && (
             <Practice
               key={practiceKey}
@@ -1839,6 +1885,10 @@ function App() {
           <footer className="content-footer">
             Polski Praktyka <span>·</span>
             {translate(' Граматика та Карта поляка')}
+            <span aria-hidden="true">·</span>
+            <a href="https://github.com/Siril-O" target="_blank" rel="noopener noreferrer">
+              GitHub · Siril-O
+            </a>
           </footer>
         </main>
       </div>

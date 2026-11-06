@@ -13,6 +13,12 @@ import {
 import vocabulary from '../vocabulary.json' with { type: 'json' };
 import { lessonTranslations as baseLessonTranslations } from './grammar-pl.js';
 import { basicExercises, basicExerciseTranslations } from './basic-practice.js';
+import {
+  impersonalTopic,
+  impersonalExercises,
+  impersonalLessonTranslations,
+  impersonalExerciseTranslations,
+} from './impersonal.js';
 import { wikibooksExercises, wikibooksExerciseTranslations } from './wikibooks-practice.js';
 import { caseCompletionExercises, caseCompletionTranslations } from './case-completion.js';
 import { expandedCaseExercises, expandedCaseTranslations } from './cases-expansion.js';
@@ -66,7 +72,7 @@ export const historyExercises = [
   ...historyContextExercises,
   ...expandedHistoryContextExercises,
 ];
-export const topics = [...baseTopics, verbTopic, spellingTopic];
+export const topics = [...baseTopics, verbTopic, impersonalTopic, spellingTopic];
 export const declensionExercises = [
   ...declensionExtraEarly,
   ...declensionExtraLate,
@@ -76,6 +82,7 @@ export const declensionExercises = [
 export const grammarExercises = [
   ...baseGrammarExercises,
   ...verbExercises,
+  ...impersonalExercises,
   ...spellingExercises,
   ...declensionExercises,
   ...basicExercises,
@@ -87,6 +94,7 @@ export const lessonTranslations = {
   pl: {
     ...baseLessonTranslations.pl,
     ...verbLessonTranslations.pl,
+    ...impersonalLessonTranslations.pl,
     ...spellingLessonTranslations.pl,
   },
 };
@@ -94,6 +102,7 @@ export const exerciseTranslations = {
   pl: {
     ...baseExerciseTranslations.pl,
     ...verbExerciseTranslations.pl,
+    ...impersonalExerciseTranslations.pl,
     ...spellingExerciseTranslations.pl,
     ...declensionExtraEarlyTranslations.pl,
     ...declensionExtraLateTranslations.pl,

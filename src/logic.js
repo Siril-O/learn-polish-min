@@ -43,7 +43,7 @@ export function validateBackup(data, bundle) {
     typeof data.topic !== 'string' ||
     !data.topic.length ||
     data.topic.length > 160 ||
-    !['grammar', 'practice', 'karta', 'vocabulary', 'settings'].includes(data.lastView)
+    !['plan', 'grammar', 'practice', 'karta', 'vocabulary', 'settings'].includes(data.lastView)
   )
     throw new Error('Invalid settings');
   const result = {

@@ -437,6 +437,7 @@ main:focus {
   padding-top: 23px;
 }
 .content-footer {
+  flex-wrap: wrap;
   border-top: 1px solid #e8ece9;
   margin-top: 45px;
   padding: 20px 0;
@@ -507,6 +508,14 @@ main:focus {
 .history-event-help {
   position: relative;
   margin-left: auto;
+}
+.history-background-body {
+  max-width: 76ch;
+  line-height: 1.75;
+  overflow-wrap: anywhere;
+}
+.history-background-body li {
+  margin-bottom: 6px;
 }
 .history-event-tooltip {
   position: absolute;

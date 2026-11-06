@@ -14,7 +14,7 @@ const unique = (values) => assert.equal(new Set(values).size, values.length);
 
 test('the entry point preserves collections and centralizes every exercise', () => {
   assert.equal(content.contentVersion, 1);
-  assert.equal(content.topics.length, 19);
+  assert.equal(content.topics.length, 20);
   assert.equal(content.history.filter((entry) => entry.category === 'chronology').length, 54);
   assert.equal(content.vocabulary.length, 158);
   assert.deepEqual(content.allExercises, [
