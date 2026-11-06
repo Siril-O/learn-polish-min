@@ -24,8 +24,16 @@ test('production requires consent, tracks sections and supports withdrawal', asy
     await route.fulfill({ response });
   });
   await page.goto('https://siril-o.github.io/learn-polish-min/#grammar');
+  const dialog = page.getByRole('dialog', { name: 'Google Analytics' });
+  await expect(dialog).toBeVisible();
+  await expect(page.getByRole('button', { name: 'Odrzuć', exact: true })).toBeFocused();
+  await page.keyboard.press('Shift+Tab');
+  await expect(page.getByRole('button', { name: 'Zezwól na analitykę' })).toBeFocused();
+  await page.keyboard.press('Shift+Tab');
+  await expect(dialog.getByRole('link')).toBeFocused();
   expect(tagRequests).toBe(0);
   await page.getByRole('button', { name: 'Odrzuć', exact: true }).click();
+  await expect(dialog).toHaveCount(0);
   await page.reload();
   expect(tagRequests).toBe(0);
   await page.goto('https://siril-o.github.io/learn-polish-min/#settings');
