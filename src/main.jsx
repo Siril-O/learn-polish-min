@@ -379,7 +379,6 @@ function Grammar({ selected, select, practice }) {
                       onClick={() => select(t.id)}
                     >
                       {translate(t.title)}
-                      <small className="text-secondary">{topicLevels[t.id]?.join(' · ')}</small>
                       <ChevronRight size={15} />
                     </button>
                   ))}

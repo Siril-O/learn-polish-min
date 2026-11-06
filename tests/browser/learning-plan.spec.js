@@ -6,7 +6,8 @@ test('learning plan switches levels and opens rules and practice', async ({ page
   await page.getByRole('button', { name: 'B1', exact: true }).click();
   await expect(page.getByText('Tryb przypuszczający: zrobiłbym, gdybym')).toBeVisible();
   const row = page.locator('.list-group-item').filter({ hasText: 'Formy -no/-to' });
-  await row.getByRole('button', { name: 'Reguły' }).click();
+  await expect(page.getByRole('button', { name: 'Reguły', exact: true })).toHaveCount(0);
+  await row.click({ position: { x: 8, y: 8 } });
   await expect(page.locator('.lesson h2')).toHaveText('Konstrukcje bezosobowe');
   await page.getByLabel('Poziom CEFR', { exact: true }).selectOption('A1');
   await expect(

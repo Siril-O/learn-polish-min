@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { BookOpen, ListChecks } from 'lucide-react';
+import { ListChecks } from 'lucide-react';
 import { useLanguage } from './interface-language.js';
 import { learningPlan } from './learning-plan.js';
 import { grammarExercises } from './content/index.js';
@@ -41,11 +41,20 @@ export default function LearningPlan({ openTopic, practice }) {
         {learningPlan[level].map((item) => (
           <div
             key={item.id}
-            className="list-group-item px-0 py-3 d-flex flex-wrap align-items-center gap-3"
+            className={`list-group-item position-relative px-0 py-3 d-flex flex-wrap align-items-center gap-3 ${item.topic ? 'learning-plan-topic' : ''}`}
           >
             <div className="flex-grow-1" style={{ flexBasis: 240 }}>
-              <div className="fw-semibold">{item.title[language]}</div>
-              <small className="text-secondary">
+              {item.topic ? (
+                <button
+                  className="stretched-link border-0 bg-transparent p-0 text-start fw-semibold text-body"
+                  onClick={() => openTopic(item.topic)}
+                >
+                  {item.title[language]}
+                </button>
+              ) : (
+                <div className="fw-semibold">{item.title[language]}</div>
+              )}
+              <small className="d-block text-secondary">
                 {labels[item.status]}
                 {item.topic
                   ? ` · ${grammarExercises.filter((exercise) => exercise.topic === item.topic).length} ${pl ? 'zadań w temacie' : 'вправ у темі'}`
@@ -55,13 +64,7 @@ export default function LearningPlan({ openTopic, practice }) {
             {item.topic && (
               <div className="d-flex gap-2">
                 <button
-                  className="btn btn-sm btn-outline-secondary"
-                  onClick={() => openTopic(item.topic)}
-                >
-                  <BookOpen size={16} aria-hidden="true" /> {pl ? 'Reguły' : 'Правила'}
-                </button>
-                <button
-                  className="btn btn-sm btn-outline-success"
+                  className="btn btn-sm btn-outline-success position-relative z-1"
                   onClick={() => practice(item.topic)}
                 >
                   <ListChecks size={16} aria-hidden="true" /> {pl ? 'Ćwicz' : 'Практика'}
