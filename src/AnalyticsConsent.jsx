@@ -49,15 +49,23 @@ export default function AnalyticsConsent({ view }) {
       className="border-bottom bg-light p-3"
       aria-label={pl ? 'Prywatność i analityka' : 'Приватність та аналітика'}
     >
-      <h2 id="analytics-title" className="h6">Google Analytics</h2>
+      <h2 id="analytics-title" className="h6">{pl ? 'Pliki cookie' : 'Файли cookie'}</h2>
       <p id="analytics-description" className="small mb-3">
         {pl
-          ? 'Za Twoją zgodą Google Analytics używa plików cookie do pomiaru odwiedzin i przeglądanych sekcji. Dane trafiają do Google. Nie wysyłamy odpowiedzi ani postępu nauki. Możesz odmówić lub wycofać zgodę w Ustawieniach.'
-          : 'За твоєю згодою Google Analytics використовує cookie для вимірювання відвідувань і переглядів розділів. Дані передаються Google. Ми не надсилаємо відповіді чи навчальний прогрес. Можна відмовитися або відкликати згоду в налаштуваннях.'}{' '}
+          ? 'Za Twoją zgodą używamy plików cookie do statystyk odwiedzin. Nie wysyłamy odpowiedzi ani postępu nauki. Możesz odmówić lub zmienić zgodę w Ustawieniach.'
+          : 'За твоєю згодою ми використовуємо cookie для статистики відвідувань. Ми не надсилаємо відповіді чи навчальний прогрес. Можна відмовитися або змінити згоду в налаштуваннях.'}
+      </p>
+      <details className="small mb-3">
+        <summary>{pl ? 'Szczegóły' : 'Докладніше'}</summary>
+        <p className="mt-2 mb-0">
+          {pl
+            ? 'Statystyki obsługuje Google Analytics. Dane trafiają do Google.'
+            : 'Статистику обробляє Google Analytics. Дані передаються Google.'}{' '}
         <a href="https://policies.google.com/privacy" target="_blank" rel="noreferrer">
           {pl ? 'Polityka prywatności Google' : 'Політика приватності Google'}
         </a>
-      </p>
+        </p>
+      </details>
       <div className="d-flex flex-wrap gap-2">
         {consent !== 'accepted' && (
           <button className="btn btn-sm btn-outline-secondary" onClick={() => choose('accepted')}>
