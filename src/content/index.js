@@ -23,6 +23,7 @@ import { wikibooksExercises, wikibooksExerciseTranslations } from './wikibooks-p
 import { caseCompletionExercises, caseCompletionTranslations } from './case-completion.js';
 import { expandedCaseExercises, expandedCaseTranslations } from './cases-expansion.js';
 import { extraCultureQuestions, extraCultureTranslations } from './culture-extra.js';
+import { traditionsQuestions, traditionsTranslations } from './traditions-extra.js';
 import { extraHistoryExercises, extraHistoryTranslations } from './history-practice-extra.js';
 import { historyContextExercises, historyContextTranslations } from './history-context.js';
 import {
@@ -65,7 +66,7 @@ import {
 } from './practice-pl.js';
 
 export const contentVersion = 1;
-export const cultureQuestions = [...baseCultureQuestions, ...extraCultureQuestions];
+export const cultureQuestions = [...baseCultureQuestions, ...extraCultureQuestions, ...traditionsQuestions];
 export const historyExercises = [
   ...baseHistoryExercises,
   ...extraHistoryExercises,
@@ -113,6 +114,7 @@ export const exerciseTranslations = {
     ...caseCompletionTranslations.pl,
     ...expandedCaseTranslations.pl,
     ...extraCultureTranslations.pl,
+    ...traditionsTranslations.pl,
     ...extraHistoryTranslations.pl,
     ...historyContextTranslations.pl,
     ...expandedHistoryContextTranslations.pl,

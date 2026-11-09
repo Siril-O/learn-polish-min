@@ -997,6 +997,11 @@ function Quiz({ item, index, total, checked, next, exit, onRule, mixedCases }) {
           <p className="mb-0" lang={language}>
             {displayItem.explanation}
           </p>
+          {item.topic === 'culture' && item.source && (
+            <a className="small d-inline-block mt-2" href={item.source} target="_blank" rel="noreferrer">
+              {language === 'pl' ? 'Źródło' : 'Джерело'} <ExternalLink size={12} aria-hidden="true" />
+            </a>
+          )}
           {!feedback && item.level === 'sentence' && (
             <p className="small mt-2 mb-0">
               {translate(
