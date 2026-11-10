@@ -2,6 +2,7 @@ import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import {
   BookOpen,
+  Info,
   Check,
   CheckCircle2,
   ChevronLeft,
@@ -26,6 +27,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './style.css';
 import Verbs from './Verbs.jsx';
 import AnalyticsConsent from './AnalyticsConsent.jsx';
+import About from './About.jsx';
 import LearningPlan from './LearningPlan.jsx';
 import { topicLevels } from './learning-plan.js';
 import HistoryEventTooltip from './HistoryEventTooltip.jsx';
@@ -64,6 +66,7 @@ const routes = [
   ['karta', 'Карта поляка', GraduationCap],
   ['vocabulary', 'Словник', Star],
   ['settings', 'Налаштування', Settings],
+  ['about', 'Про застосунок', Info],
 ];
 const levels = {
   choice: 'Вибір відповіді',
@@ -447,6 +450,8 @@ function Practice({ initialTopic, initialVerbId, initialHistoryGroup, state, upd
   );
   const [level, setLevel] = useState('choice');
   const [count, setCount] = useState('10');
+  const [customize, setCustomize] = useState(false);
+  const practiceCategory = ['history', 'culture'].includes(topic) ? 'karta' : ['vocabulary', 'saved'].includes(topic) ? 'words' : 'grammar';
   const [session, setSession] = useState(null);
   const [rule, setRule] = useState(null);
   const source = allExercises.filter((q) => {
@@ -518,7 +523,13 @@ function Practice({ initialTopic, initialVerbId, initialHistoryGroup, state, upd
       />
       {!session && (
         <>
-          <div className="practice-config">
+          <div className="d-flex flex-wrap gap-2 mb-4" role="group" aria-label={language === 'pl' ? 'Dział ćwiczeń' : 'Розділ вправ'}>
+            {[['grammar', 'Gramatyka', 'Граматика', 'all'], ['karta', 'Karta Polaka', 'Карта поляка', 'history'], ['words', 'Słownictwo', 'Словник', 'vocabulary']].map(([id, pl, uk, target]) => (
+              <button key={id} className={`btn btn-sm ${practiceCategory === id ? 'btn-success' : 'btn-outline-secondary'}`} aria-pressed={practiceCategory === id} onClick={() => changeTopic(target)}>{language === 'pl' ? pl : uk}</button>
+            ))}
+            <button className="btn btn-sm btn-outline-secondary" aria-pressed={topic === 'mistakes'} onClick={() => changeTopic('mistakes')}>{language === 'pl' ? 'Moje błędy' : 'Мої помилки'} ({state.mistakes.length})</button>
+          </div>
+          <div className={`practice-config practice-simple ${customize ? 'is-customized' : ''}`}>
             <div>
               <label className="form-label" htmlFor="practice-topic">
                 {translate('Тема')}
@@ -529,6 +540,7 @@ function Practice({ initialTopic, initialVerbId, initialHistoryGroup, state, upd
                 value={topic}
                 onChange={(e) => changeTopic(e.target.value)}
               >
+                {practiceCategory === 'grammar' && <>
                 <option value="all">{translate('Уся граматика')}</option>
                 <option value="cases">{translate('Змішані відмінки')}</option>
                 <option value="mistakes">
@@ -542,12 +554,17 @@ function Practice({ initialTopic, initialVerbId, initialHistoryGroup, state, upd
                     </option>
                   ))}
                 </optgroup>
+                </>}
+                {practiceCategory === 'karta' &&
                 <optgroup label={translate('Карта поляка')}>
                   <option value="history">{translate('Дати й події')}</option>
                   <option value="culture">{translate('Культура та традиції')}</option>
+                </optgroup>}
+                {practiceCategory === 'words' && <optgroup label={translate('Словник')}>
                   <option value="vocabulary">{translate('Слова з текстів')}</option>
                   <option value="saved">{translate('Збережені слова')}</option>
                 </optgroup>
+                }
               </select>
             </div>
             {topic === 'verb-tables' && (
@@ -589,7 +606,7 @@ function Practice({ initialTopic, initialVerbId, initialHistoryGroup, state, upd
                     <option value="context">{translate('Питання про події')}</option>
                   </select>
                 </div>
-                <div>
+                <div className="practice-advanced">
                   <label className="form-label" htmlFor="practice-history-from">
                     {translate('Рік від')}
                   </label>
@@ -607,7 +624,7 @@ function Practice({ initialTopic, initialVerbId, initialHistoryGroup, state, upd
                     ))}
                   </select>
                 </div>
-                <div>
+                <div className="practice-advanced">
                   <label className="form-label" htmlFor="practice-history-to">
                     {translate('Рік до')}
                   </label>
@@ -625,7 +642,7 @@ function Practice({ initialTopic, initialVerbId, initialHistoryGroup, state, upd
                     ))}
                   </select>
                 </div>
-                <div>
+                <div className="practice-advanced">
                   <label className="form-label" htmlFor="practice-history-group">
                     {translate('Набір дат')}
                   </label>
@@ -645,12 +662,11 @@ function Practice({ initialTopic, initialVerbId, initialHistoryGroup, state, upd
               </>
             )}
             <div>
-              <label className="form-label" htmlFor="practice-level">
-                {translate('Складність')}
-              </label>
+              <div className="form-label" id="practice-format-label">{language === 'pl' ? 'Forma odpowiedzi' : 'Формат відповіді'}</div>
               <select
                 id="practice-level"
-                className="form-select"
+                className="d-none"
+                aria-label={translate('Складність')}
                 disabled={topic === 'mistakes' || !supports.length}
                 value={activeLevel || ''}
                 onChange={(e) => setLevel(e.target.value)}
@@ -661,8 +677,11 @@ function Practice({ initialTopic, initialVerbId, initialHistoryGroup, state, upd
                   </option>
                 ))}
               </select>
+              <div className="d-flex flex-wrap gap-2" role="group" aria-labelledby="practice-format-label">
+                {supports.map((value) => <button key={value} className={`btn btn-sm ${value === activeLevel ? 'btn-success' : 'btn-outline-secondary'}`} aria-pressed={value === activeLevel} disabled={topic === 'mistakes'} onClick={() => setLevel(value)}>{translate(levels[value])}</button>)}
+              </div>
             </div>
-            <div>
+            <div className="practice-advanced">
               <label className="form-label" htmlFor="practice-count">
                 {translate('Завдань у сесії')}
               </label>
@@ -681,6 +700,7 @@ function Practice({ initialTopic, initialVerbId, initialHistoryGroup, state, upd
               </select>
             </div>
           </div>
+          <button className="btn btn-link px-0 my-2" aria-expanded={customize} onClick={() => setCustomize((value) => !value)}><Settings size={16} /> {language === 'pl' ? 'Dostosuj sesję' : 'Налаштувати сесію'}</button>
           {topic === 'history' && !validHistoryRange(historyFrom, historyTo) && (
             <p className="text-danger" role="alert">
               {translate('Вкажи коректні роки: початок не може бути пізніше кінця.')}
@@ -1731,7 +1751,22 @@ function App() {
   const [warning, setWarning] = useState(initial.warning);
   const routeFromHash = () =>
     routes.some(([id]) => id === location.hash.slice(1)) ? location.hash.slice(1) : null;
-  const [view, setView] = useState(routeFromHash() || initial.state.lastView);
+  const [view, setView] = useState(() => {
+    const directRoute = routeFromHash();
+    try {
+      const returning = localStorage.getItem('polski-praktyka:visited') || localStorage.getItem(STORAGE_KEY);
+      return directRoute || (returning ? initial.state.lastView : 'about');
+    } catch {
+      return directRoute || initial.state.lastView;
+    }
+  });
+  useEffect(() => {
+    try {
+      localStorage.setItem('polski-praktyka:visited', '1');
+    } catch {
+      // Navigation still works when browser storage is unavailable.
+    }
+  }, []);
   const [practiceTopic, setPracticeTopic] = useState('all');
   const [practiceVerbId, setPracticeVerbId] = useState('');
   const [practiceHistoryGroup, setPracticeHistoryGroup] = useState('all');
@@ -1833,6 +1868,7 @@ function App() {
         </nav>
         <main id="main-content" tabIndex={-1}>
           <AnalyticsConsent view={view} />
+          {view === 'about' && <About navigate={navigate} />}
           {warning && view !== 'settings' && (
             <div className="alert alert-warning small" role="status">
               {translate(warning)}
@@ -1875,6 +1911,7 @@ function App() {
           )}{' '}
           {view === 'settings' && <SettingsPage state={state} update={update} warning={warning} />}
           <footer className="content-footer">
+            <a href="#about" onClick={(event) => { event.preventDefault(); navigate('about'); }}>{language === 'pl' ? 'O aplikacji' : 'Про застосунок'}</a>
             Polski Praktyka <span>·</span>
             {translate(' Граматика та Карта поляка')}
             <span aria-hidden="true">·</span>

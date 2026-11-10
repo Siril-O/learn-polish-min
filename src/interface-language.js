@@ -30,6 +30,7 @@ export function useLanguage() {
 
 const polish = {
   'План навчання': 'Plan nauki',
+  'Про застосунок': 'O aplikacji',
   'Безособові конструкції': 'Konstrukcje bezosobowe',
   'Докладніше про подію': 'Więcej o wydarzeniu',
   'Без обмежень': 'Bez ograniczeń',

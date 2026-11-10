@@ -1,6 +1,6 @@
 export const measurementId = 'G-WGNJPHP7HP';
 export const consentKey = 'polski-praktyka-analytics-consent';
-const routes = new Set(['plan', 'grammar', 'practice', 'karta', 'vocabulary', 'settings']);
+const routes = new Set(['plan', 'grammar', 'practice', 'karta', 'vocabulary', 'settings', 'about']);
 let initialized = false;
 let lastRoute = null;
 
