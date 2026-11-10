@@ -25,6 +25,7 @@ export function useLanguage() {
       return () => listeners.delete(listener);
     },
     () => language,
+    () => 'pl',
   );
 }
 
