@@ -452,9 +452,24 @@ main:focus {
   background-color: #f3f6f4;
 }
 .about-page { max-width: 960px; }
+.app-layout.landing-layout { display: block; }
+.landing-layout > main { max-width: 1040px; margin: 0 auto; width: 100%; }
+.landing-open { text-align: right; padding: 12px 24px; border-bottom: 1px solid #e8ece9; }
+.landing-intro { padding: 16px 0 8px; max-width: 680px; }
+.landing-benefits { display: flex; flex-wrap: wrap; gap: 16px 32px; padding: 24px 0; font-weight: 600; color: #52635c; }
+.landing-paths { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 40px; padding: 32px 0; }
+.landing-paths section:last-child > svg { color: #9c3e57; }
+.landing-finish { padding: 24px 0 40px; }
+@media (max-width: 700px) { .landing-paths { grid-template-columns: 1fr; gap: 32px; } }
+.about-demo { border-block: 1px solid #cbdcd7; background: #edf5f1; padding: 24px; margin-top: 24px; }
+.about-demo-label { color: #50645c; font-size: 14px; }
+.about-demo h2 { font-size: 36px; margin: 20px 0; }
+.about-demo h2 span { color: #176b54; }
+.about-demo .btn { min-width: 80px; min-height: 44px; }
+.about-demo-feedback { min-height: 76px; max-width: 65ch; padding-top: 18px; line-height: 1.6; }
 .about-page > p { max-width: 70ch; }
 .about-preview { margin: 24px 0 32px; }
-.about-preview img { display: block; width: 100%; height: auto; max-height: 340px; object-fit: contain; object-position: left top; }
+.about-preview img { display: block; width: 100%; height: auto; object-fit: contain; object-position: left top; }
 .about-sections { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; padding-bottom: 24px; }
 @media (max-width: 700px) { .about-sections { grid-template-columns: 1fr; } }
 .practice-simple { grid-template-columns: repeat(2, minmax(0, 1fr)); }

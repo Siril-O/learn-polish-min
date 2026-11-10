@@ -1841,8 +1841,9 @@ function App() {
           <option value="uk">Українська</option>
         </select>
       </header>
-      <div className="app-layout">
-        <nav className="main-nav" aria-label={translate('Основна навігація')}>
+      {view === 'about' && <div className="landing-open"><a href="#plan" onClick={(e) => { e.preventDefault(); navigate('plan'); }}>{language === 'pl' ? 'Otwórz aplikację' : 'Відкрити застосунок'} <ArrowRight size={16} /></a></div>}
+      <div className={view === 'about' ? 'app-layout landing-layout' : 'app-layout'}>
+        {view !== 'about' && <nav className="main-nav" aria-label={translate('Основна навігація')}>
           {routes.map(([id, label, Icon]) => (
             <a
               key={id}
@@ -1865,7 +1866,7 @@ function App() {
             <span className="status-dot" />
             {translate(' Збереження на пристрої')}
           </div>
-        </nav>
+        </nav>}
         <main id="main-content" tabIndex={-1}>
           <AnalyticsConsent view={view} />
           {view === 'about' && <About navigate={navigate} />}
